@@ -120,7 +120,7 @@ class PostfixConverter():
             '[OP_MEM]': ['mem', 2, 'aux'],
             # Working
             '[OP_LIST_ADD_COMB]': [],  # :902
-            '[OP_LIST_DIFF]': [],
+            '[OP_LIST_DIFF]': ['', 2, 'list_function'],
             '[OP_LIST_COND_MAX_MIN]': [],
         }
 
@@ -1428,8 +1428,6 @@ else:\n\
                                 intermediate_list = list(item_name_index_dict.keys())
                                 intermediate_list.sort(keys=item_name_index_dict.get, reverse=True)
 
-                                
-
                         elif operator_name in ['[OP_LIST_SCALAR_ADD]', '[OP_LIST_SCALAR_MUL]']:
                             a, a_name = self.operand_stack.pop()
                             temp_list, temp_lname = self.list_stack.pop()
@@ -1555,7 +1553,24 @@ for i in range(len({temp_list1})):\n\
 for i in range(len({temp_list1})):\n\
     {intermediate_list}.append(float({temp_list1}[i])/float({temp_list2}[i]))\n'.format(intermediate_list=new_list_name, temp_list1=temp_lname1, temp_list2=temp_lname2)
                             self.list_stack.push(intermediate_list, new_list_name)
- 
+                        elif operator_name == '[OP_LIST_DIFF]':
+                            temp_list2, temp_lname2 = self.list_stack.pop()
+                            temp_list1, temp_lname1 = self.list_stack.pop()
+                            new_var_name = self.operand_names.pop()
+                            intermediate = -1
+                            for idx, (v1, v2) in enumerate(zip(temp_list1, temp_list2)):
+                                if v1 != v2:
+                                    intermediate = idx+1
+                                    break
+                            if intermediate == -1:
+                                raise ValueError
+                            self.operand_stack.push(intermediate, new_var_name)
+                            self.code_string += "\n{new_var_name} = -1\n\
+for idx, (v1, v2) in enumerate(zip({temp_list1}, {temp_list2})):\n\
+    if v1 != v2:\n\
+        {new_var_name} = idx+1\n\
+        break\n".format(new_var_name=new_var_name, temp_list1=temp_lname1, temp_list2=temp_lname2)
+
                     elif operator_info[1]==3:
                         if operator_name == '[OP_LIST_ARANGE]':
                             c, c_name = self.operand_stack.pop()
