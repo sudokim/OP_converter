@@ -130,7 +130,7 @@ class PostfixConverter:
             '[OP_LIST_COND_MAX_MIN]': ['comp', 2, 'list_function'],
             '[OP_MEM]': ['mem', 2, 'aux'],
             # Working
-            '[OP_LIST_ADD_COMB]': ['', 1, 'list_function'],  # :902
+            '[OP_LIST_ADD_COMB]': ['', 2, 'list_function'],  # :902
             '[OP_LIST_DIFF]': [],
         }
 
@@ -1509,14 +1509,14 @@ else:\n\
                             elif operator_name == '[OP_LIST_COND_MAX_MIN]':
                                 # a_list: List of items
                                 # b_list: List of conditions -> multiple of 3
-                                items_name_list = a_list.split()
+                                items_name_list = a_list.copy()
 
                                 # Process conditions
                                 # conditions: list[str], List of string conditions which is evaluated using `eval()` later
                                 # If an operand is a string, it must be wrapped with { }
                                 # ex) ["{A} < {B}", "{B} == 3", "{C} > {A}"]
                                 conditions = []
-                                condition_list = b_list.split()
+                                condition_list = b_list.copy()
                                 temp_stack = []  # Temporary stack for processing postfix conditions
                                 for index_, cond_ in enumerate(condition_list):
                                     try:
@@ -1552,14 +1552,14 @@ else:\n\
                                 condition_found = False
                                 item_name_index_dict = {}
                                 for perm in itertools.permutations(range(1, len(items_name_list) + 1)):
-                                    item_name_index_dict = {i_: p_ for i_, p_ in
-                                                            zip(items_name_list, perm)}  # ex) {"A": 2, "B": 1, "C": 3}
+                                    item_name_index_dict = dict(
+                                            zip(items_name_list, perm))  # ex) {"A": 2, "B": 1, "C": 3}
 
                                     # Format strings from `conditions`
                                     # ex) "{A} < {B}" -> "3 < 2"
                                     formatted_conditions = [condition.format_map(item_name_index_dict) for condition in
                                                             conditions]
-                                    if all(eval(condition) for condition in formatted_conditions):
+                                    if all(map(eval, formatted_conditions)):
                                         # All conditions met
                                         condition_found = True
                                         break
@@ -1568,8 +1568,40 @@ else:\n\
 
                                 # Sort result
                                 intermediate_list = list(item_name_index_dict.keys())
-                                intermediate_list.sort(keys=item_name_index_dict.get, reverse=True)
+                                intermediate_list.sort(key=item_name_index_dict.get, reverse=True)
 
+                                del item_name_index_dict
+
+                                self.code_string += \
+                                    f"global item_name_index_dict\n" \
+                                    f"items_name_list = {a_lname}.copy()\n" \
+                                    "conditions = []\n" \
+                                    f"condition_list = {b_lname}.copy()\n" \
+                                    "temp_stack = []\n" \
+                                    "for index_, cond_ in enumerate(condition_list):\n" \
+                                    "    if cond_ in (\"<\", \">\", \"==\"):\n" \
+                                    "        operand_right = temp_stack.pop()\n" \
+                                    "        operand_left = temp_stack.pop()\n" \
+                                    "        if cond_ == \"=\":\n" \
+                                    "            cond_ = \"==\"\n" \
+                                    "        conditions.append(f\"{operand_left} {cond_} {operand_right}\")\n" \
+                                    "    else:\n" \
+                                    "        if not cond_.isdigit():\n" \
+                                    "            cond_ = \"{\" + cond_ + \"}\"\n" \
+                                    "        temp_stack.append(cond_)\n" \
+                                    "item_name_index_dict = {}\n" \
+                                    "for perm in itertools.permutations(range(1, len(items_name_list) + 1)):\n" \
+                                    "    item_name_index_dict = dict(zip(items_name_list, perm))\n" \
+                                    "    formatted_conditions = \\\n" \
+                                    "        [condition.format_map(item_name_index_dict) for condition in conditions]\n" \
+                                    "    if all(map(eval, formatted_conditions)):\n" \
+                                    "        break\n" \
+                                    f"{new_list_name} = list(item_name_index_dict.keys())\n" \
+                                    f"{new_list_name}.sort(key=item_name_index_dict.get, reverse=True)\n"
+
+                                self.list_stack.push(a_list, a_lname)
+                                self.list_stack.push(b_list, b_lname)
+                                self.list_stack.push(intermediate_list, new_list_name)
 
 
                         elif operator_name in ['[OP_LIST_SCALAR_ADD]', '[OP_LIST_SCALAR_MUL]']:
