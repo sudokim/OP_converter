@@ -18,6 +18,10 @@ def timeout(seconds=10, error_message=os.strerror(errno.ETIME)):
             raise TimeoutError(error_message)
 
         def wrapper(*args, **kwargs):
+            if os.name == 'nt':
+                # Windows doesn't support SIGALRM
+                return func(*args, **kwargs)
+
             signal.signal(signal.SIGALRM, _handle_timeout)
             signal.alarm(seconds)
             try:
@@ -38,7 +42,7 @@ class StacknNames:  # 2개의 stack으로 구성된 class.
 
     def pop(self):
         if len(self.content_stack) < 1:
-            return None
+            return None, None
         return self.content_stack.pop(), self.name_stack.pop()
 
     def push(self, item, new_name):
@@ -49,7 +53,7 @@ class StacknNames:  # 2개의 stack으로 구성된 class.
         return len(self.content_stack)
 
 
-class PostfixConverter():
+class PostfixConverter:
     def __init__(self):
         # operator_dic = {operator:['what it does', '# of input', 'type of operator', '# of operand created', '# of lists created']}
         self.operator_dic = {
@@ -88,7 +92,7 @@ class PostfixConverter():
             '[OP_LIST_INV]': ['', 1, 'list_function'],
             '[OP_LIST_GET_DIVISOR]': ['', 1, 'list_function'],
             '[OP_LIST_NUM2SUM]': ['', 1, 'list_function', 0, 1],
-            '[OP_LIST_LEN]': ['len', 1, 'list_function'],
+            '[OP_LIST_LEN]': ['len', 1, 'list_function', 1, 0],
             '[OP_LIST_GET]': ['', 2, 'list_function'],
             '[OP_LIST_INDEX]': ['', 2, 'list_function'],
             '[OP_LIST_GET_PERM]': ['', 2, 'list_function'],
@@ -126,15 +130,13 @@ class PostfixConverter():
             '[OP_LIST_COND_MAX_MIN]': ['comp', 2, 'list_function'],
             '[OP_MEM]': ['mem', 2, 'aux'],
             # Working
-            '[OP_LIST_ADD_COMB]': [],  # :902
-            '[OP_LIST_DIFF]': ['', 2, 'list_function'],
-            '[OP_LIST_COND_MAX_MIN]': [],
+            '[OP_LIST_ADD_COMB]': ['', 2, 'list_function'],  # :902
+            '[OP_LIST_DIFF]': [],
         }
 
-        ascii_lowercase_rev = ascii_lowercase[::-1]
-        self.operand_names = [f'var_{a}{b}' for a in ascii_lowercase_rev for b in ascii_lowercase_rev]
-        self.list_names = [f'list_{a}{b}' for a in ascii_lowercase_rev for b in ascii_lowercase_rev]
-        self.dict_names = [f'dict_{a}{b}' for a in ascii_lowercase_rev for b in ascii_lowercase_rev]
+        self.operand_names = [f'var_{a}{b}' for a in ascii_lowercase for b in ascii_lowercase]
+        self.list_names = [f'list_{a}{b}' for a in ascii_lowercase for b in ascii_lowercase]
+        self.dict_names = [f'dict_{a}{b}' for a in ascii_lowercase for b in ascii_lowercase]
 
         self.operand_stack = StacknNames()
         self.list_stack = StacknNames()
@@ -243,7 +245,7 @@ class PostfixConverter():
             return True
 
     # convert function
-    # @timeout(10)
+    @timeout(10)
     def convert(self, postfix_eq):
         # 주요 function : 주어진 postfix 식을 code로 생성.
         self.__init__()
@@ -272,7 +274,7 @@ class PostfixConverter():
                                 element = eval(str(element))
                             new_list.append(element)
                             self.code_string += 'if "/" in str({var_name}):\n    {var_name} = eval(str({var_name}))\n{list_name}.append({var_name})\n'.format(
-                                list_name=list_name, var_name=var_name)
+                                    list_name=list_name, var_name=var_name)
 
                     elif i == '[OP_LIST_POP]':
                         self.list_stack.pop()
@@ -337,7 +339,7 @@ class PostfixConverter():
 
                             intermediate = math.gcd(num1, num2)
                             self.code_string += '{new_var} = math.gcd(int({var1}), int({var2}))\n'.format(
-                                new_var=var_name, var1=num1_name, var2=num2_name)
+                                    new_var=var_name, var1=num1_name, var2=num2_name)
                         elif operator_name == '[OP_LCM]':
                             num1, num1_name = self.operand_stack.pop()
                             num2, num2_name = self.operand_stack.pop()
@@ -345,7 +347,7 @@ class PostfixConverter():
 
                             intermediate = num1 * num2 / math.gcd(num1, num2)
                             self.code_string += '{new_var} = {var1} * {var2} / math.gcd(int({var1}), int({var2}))\n'.format(
-                                new_var=var_name, var1=num1_name, var2=num2_name)
+                                    new_var=var_name, var1=num1_name, var2=num2_name)
 
                         elif operator_name in ['[OP_CEIL]', '[OP_FLOOR]']:
                             b, b_name = self.operand_stack.pop()
@@ -356,9 +358,9 @@ class PostfixConverter():
                                     # 정수 올림
                                     int(a)
                                     intermediate_eq = 'int((({a}+9*10**({b}-2))//(10**({b}-1)))*10**({b}-1))\n'.format(
-                                        a=a_name, b=b_name)
+                                            a=a_name, b=b_name)
                                     intermediate = eval(
-                                        'int((({a}+9*10**({b}-2))//(10**({b}-1)))*10**({b}-1))\n'.format(a=a, b=b))
+                                            'int((({a}+9*10**({b}-2))//(10**({b}-1)))*10**({b}-1))\n'.format(a=a, b=b))
                                     self.code_string += '{var}={eq}\n'.format(var=var_name, eq=intermediate_eq)
                                 except:
                                     # int(float) -> floor / int(float+1) -> ceil
@@ -819,10 +821,8 @@ for c in candi:\n\
                     elif operator_name == '[OP_GEN_POSSIBLE_LIST]':
                         unk, unk_name = self.operand_stack.pop()
                         unk = str(unk)
-                        ans_dict = dict()
-                        variable_candi = set(
-                                ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
-                                 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])
+                        variable_candi = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
+                                          'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
                         ans_dict = {v: 0 for v in set(unk) & variable_candi}
                         candi = list(itertools.product('0123456789', repeat=len(ans_dict)))
                         intermediate_list = []
@@ -861,7 +861,7 @@ for c in candi:\n\
                             self.list_stack.push(new_list, new_list_name)
                             self.code_string += '{} = {}\n'.format(new_list_name, new_list)
                     elif operator_info[
-                        1] == 1:  # OP_LIST_SUM, OP_LIST_MEAN, OP_LIST_LEN, OP_LIST_GET_DIVISOR / input: list / output: scalar
+                        1] == 1:  # OP_LIST_SUM, OP_LIST_MEAN, OP_LIST_LEN, OP_LIST_GET_DIVISOR, OP_LIST_ADD_COMB / input: list / output: scalar
                         if operator_name == '[OP_LIST_DISTINCT]':
                             temp_list, temp_lname = self.list_stack.pop()
                             intermediate_list = list(set(temp_list))
@@ -937,7 +937,7 @@ while {a}//10 > 0:\n\
                             new_list_name = self.list_names.pop()
                             intermediate_list = temp_list[::-1]
                             self.code_string += '{intermediate_list} = {temp_list}[::-1]\n'.format(
-                                intermediate_list=new_list_name, temp_list=temp_lname)
+                                    intermediate_list=new_list_name, temp_list=temp_lname)
                             self.list_stack.push(intermediate_list, new_list_name)
                         elif operator_name == '[OP_LIST_NUM2SUM]':
                             temp_list, temp_lname = self.list_stack.pop()
@@ -993,15 +993,23 @@ for i in range(1, num_sqrt+1):\n\
                             self.list_stack.push(temp_list, temp_lname)
                         elif operator_name == '[OP_LIST_ADD_COMB]':
                             # List -> 합의 가지 수
+                            temp_list, temp_list_name = self.list_stack.pop()
+                            combs = set()
 
-                            num_list, num_lname = self.list_stack.pop()
-                            possible_combinations = set()
+                            for length in range(1, len(temp_list) + 1):
+                                combs.update(sum(comb) for comb in itertools.combinations(temp_list, length))
 
-                            for length in range(1, len(num_list) + 1):
-                                possible_combinations.update(sum(itertools.combinations(num_list, length)))
-
-
-
+                            combs = len(combs)
+                            new_var_name = self.operand_names.pop(0)
+                            self.code_string += "combs = set()\n" \
+                                                "for length in range(1, len({temp_list_name})+1):\n" \
+                                                "    combs.update(sum(comb) for comb in itertools.combinations(\n" \
+                                                "                 {temp_list_name}, length))\n" \
+                                                "{new_var_name} = len(combs)\n" \
+                                                "del combs\n".format(temp_list_name=temp_list_name,
+                                                                     new_var_name=new_var_name)
+                            self.operand_stack.push(combs, new_var_name)
+                            self.list_stack.push(temp_list, temp_list_name)
 
                         elif operator_name == '[OP_LIST_DIFF]':
                             pass
@@ -1097,7 +1105,8 @@ for i in {temp}:\n\
                                 new_var_name = self.operand_names.pop(0)
                                 new_list_name = self.list_names.pop(0)
                                 self.code_string += '{new_list}={temp_list}.copy()\n{new_list}.sort()\n{intermediate} = {new_list}[-{a}]\n'.format(
-                                    new_list=new_list_name, temp_list=temp_lname, intermediate=new_var_name, a=a_name)
+                                        new_list=new_list_name, temp_list=temp_lname, intermediate=new_var_name,
+                                        a=a_name)
                                 self.list_stack.push(temp_list, temp_lname)
                                 self.operand_stack.push(intermediate, new_var_name)
                             elif operator_name == '[OP_LIST_MIN]':
@@ -1109,7 +1118,8 @@ for i in {temp}:\n\
                                 new_var_name = self.operand_names.pop(0)
                                 new_list_name = self.list_names.pop(0)
                                 self.code_string += '{new_list}={temp_list}.copy()\n{new_list}.sort()\n{intermediate} = {new_list}[{a}-1]\n'.format(
-                                    new_list=new_list_name, temp_list=temp_lname, intermediate=new_var_name, a=a_name)
+                                        new_list=new_list_name, temp_list=temp_lname, intermediate=new_var_name,
+                                        a=a_name)
                                 self.list_stack.push(temp_list, temp_lname)
                                 self.operand_stack.push(intermediate, new_var_name)
                             elif operator_name == '[OP_LIST_GET_PERM]':  #
@@ -1125,11 +1135,11 @@ for i in {temp}:\n\
 {intermediate_list} = list(itertools.permutations({intermediate_list}, {a}))\n\
 {intermediate_list} = [''.join(num_list) for num_list in {intermediate_list}]\n\
 {intermediate_list} = [str_num for str_num in {intermediate_list} if str_num[0] != '0']\n".format(
-                                    intermediate_list=new_list_name, temp_list=temp_lname, a=a_name)
+                                        intermediate_list=new_list_name, temp_list=temp_lname, a=a_name)
                                 if self.is_number(intermediate_list[0]):
                                     intermediate_list = [self.to_float(i) for i in intermediate_list]
                                     self.code_string += "{intermediate_list} = [float(i) for i in {intermediate_list}]\n".format(
-                                        intermediate_list=new_list_name)
+                                            intermediate_list=new_list_name)
 
                                 self.list_stack.push(temp_list, temp_lname)
                                 self.list_stack.push(intermediate_list, new_list_name)
@@ -1146,11 +1156,11 @@ for i in {temp}:\n\
 {intermediate_list} = list(itertools.product({intermediate_list}, repeat={a}))\n\
 {intermediate_list} = [''.join(num_list) for num_list in {intermediate_list}]\n\
 {intermediate_list} = [str_num for str_num in {intermediate_list} if str_num[0] != '0']\n".format(
-                                    intermediate_list=new_list_name, temp_list=temp_lname, a=a_name)
+                                        intermediate_list=new_list_name, temp_list=temp_lname, a=a_name)
                                 if self.is_number(intermediate_list[0]):
                                     intermediate_list = [self.to_float(i) for i in intermediate_list]
                                     self.code_string += "{intermediate_list} = [float(i) for i in {intermediate_list}]\n".format(
-                                        intermediate_list=new_list_name)
+                                            intermediate_list=new_list_name)
                                 self.list_stack.push(temp_list, temp_lname)
                                 self.list_stack.push(intermediate_list, new_list_name)
 
@@ -1161,7 +1171,7 @@ for i in {temp}:\n\
                                         flag_unknown = True
                                         unknown_idx = idx
                                         possible_idx = [i for i in range(
-                                            len(temp_list))]  # list of possible_idx를 만듬. unknown_idx만 제외.
+                                                len(temp_list))]  # list of possible_idx를 만듬. unknown_idx만 제외.
                                         possible_idx.pop(unknown_idx)
                                         # 미지수는 하나만 있는 것으로 간주.
                                     else:
@@ -1177,7 +1187,7 @@ for i in {temp}:\n\
                                             temp_list[possible_idx[1]] - temp_list[possible_idx[0]]) / (
                                             possible_idx[1] - possible_idx[0]):
                                         difference = int((temp_list[possible_idx[2]] - temp_list[possible_idx[1]]) / (
-                                                    possible_idx[2] - possible_idx[1]))
+                                                possible_idx[2] - possible_idx[1]))
                                         start = temp_list[0] if unknown_idx != 0 else temp_list[1] - difference
                                         end = start + difference * 100  # arbitrary large number
                                         intermediate_list = [i for i in range(start, end, difference)]
@@ -1189,8 +1199,8 @@ for i in {temp}:\n\
                                             temp_list[possible_idx[1]] / temp_list[possible_idx[0]]) ** (
                                             possible_idx[2] - possible_idx[1]):
                                         ratio = int(temp_list[possible_idx[2]] / temp_list[possible_idx[1]]) if \
-                                        possible_idx[2] - possible_idx[1] == 1 else int(
-                                            temp_list[possible_idx[1]] / temp_list[possible_idx[0]])
+                                            possible_idx[2] - possible_idx[1] == 1 else int(
+                                                temp_list[possible_idx[1]] / temp_list[possible_idx[0]])
                                         start = temp_list[0] if unknown_idx != 0 else temp_list[1] / ratio
                                         end = 1000  # arbitrary large number
                                         intermediate_list = [start]
@@ -1235,7 +1245,7 @@ for i in {temp}:\n\
                                             intermediate_list = [temp_list[0], temp_list[1], temp_list[2]]
                                             for i in range(100):
                                                 intermediate_list.append(
-                                                    intermediate_list[i + 1] + intermediate_list[i + 2])
+                                                        intermediate_list[i + 1] + intermediate_list[i + 2])
                                             intermediate = intermediate_list[a - 1]
 
                                         elif (temp_list[2] - temp_list[1]) - (temp_list[1] - temp_list[0]) == (
@@ -1243,7 +1253,7 @@ for i in {temp}:\n\
                                                 temp_list[2] - temp_list[1]):  # 계차수열 - 계차 : 등차수열
                                             # seq_of_diff = [(temp_list[1]-temp_list[0]), (temp_list[2]-temp_list[1]), (temp_list[3]-temp_list[2]), ...]
                                             int_difference = (temp_list[2] - temp_list[1]) - (
-                                                        temp_list[1] - temp_list[0])
+                                                    temp_list[1] - temp_list[0])
                                             int_start = temp_list[1] - temp_list[0]
                                             int_end = int_start + int_difference * 100
                                             seq_of_diff = [i for i in range(int_start, int_end, int_difference)]
@@ -1256,7 +1266,7 @@ for i in {temp}:\n\
                                                 temp_list[3] - temp_list[2]) / (
                                                 temp_list[2] - temp_list[1]):  # 계차수열 - 계차 : 등비수열
                                             int_ratio = (temp_list[2] - temp_list[1]) // (
-                                                        temp_list[1] - temp_list[0])  # common ratio / 공비
+                                                    temp_list[1] - temp_list[0])  # common ratio / 공비
                                             int_start = temp_list[1] - temp_list[0]
                                             seq_of_ratio = [int_start]
                                             intermediate_list = []
@@ -1473,7 +1483,7 @@ else:\n\
                                 new_var_name = self.operand_names.pop(0)
                                 new_list_name = self.list_names.pop(0)
                                 self.code_string += "{var} = len({temp_list})\n{var} = int({a}%{var})\n{var} = {temp_list}[{var}]\n".format(
-                                    var=new_var_name, temp_list=temp_lname, a=a_name)
+                                        var=new_var_name, temp_list=temp_lname, a=a_name)
                                 self.list_stack.push(temp_list, new_list_name)
                                 self.operand_stack.push(intermediate, new_var_name)
                             else:
@@ -1499,14 +1509,14 @@ else:\n\
                             elif operator_name == '[OP_LIST_COND_MAX_MIN]':
                                 # a_list: List of items
                                 # b_list: List of conditions -> multiple of 3
-                                items_name_list = a_list.split()
+                                items_name_list = a_list.copy()
 
                                 # Process conditions
                                 # conditions: list[str], List of string conditions which is evaluated using `eval()` later
                                 # If an operand is a string, it must be wrapped with { }
                                 # ex) ["{A} < {B}", "{B} == 3", "{C} > {A}"]
                                 conditions = []
-                                condition_list = b_list.split()
+                                condition_list = b_list.copy()
                                 temp_stack = []  # Temporary stack for processing postfix conditions
                                 for index_, cond_ in enumerate(condition_list):
                                     try:
@@ -1542,14 +1552,14 @@ else:\n\
                                 condition_found = False
                                 item_name_index_dict = {}
                                 for perm in itertools.permutations(range(1, len(items_name_list) + 1)):
-                                    item_name_index_dict = {i_: p_ for i_, p_ in
-                                                            zip(items_name_list, perm)}  # ex) {"A": 2, "B": 1, "C": 3}
+                                    item_name_index_dict = dict(
+                                            zip(items_name_list, perm))  # ex) {"A": 2, "B": 1, "C": 3}
 
                                     # Format strings from `conditions`
                                     # ex) "{A} < {B}" -> "3 < 2"
                                     formatted_conditions = [condition.format_map(item_name_index_dict) for condition in
                                                             conditions]
-                                    if all(eval(condition) for condition in formatted_conditions):
+                                    if all(map(eval, formatted_conditions)):
                                         # All conditions met
                                         condition_found = True
                                         break
@@ -1558,7 +1568,40 @@ else:\n\
 
                                 # Sort result
                                 intermediate_list = list(item_name_index_dict.keys())
-                                intermediate_list.sort(keys=item_name_index_dict.get, reverse=True)
+                                intermediate_list.sort(key=item_name_index_dict.get, reverse=True)
+
+                                del item_name_index_dict
+
+                                self.code_string += \
+                                    f"global item_name_index_dict\n" \
+                                    f"items_name_list = {a_lname}.copy()\n" \
+                                    "conditions = []\n" \
+                                    f"condition_list = {b_lname}.copy()\n" \
+                                    "temp_stack = []\n" \
+                                    "for index_, cond_ in enumerate(condition_list):\n" \
+                                    "    if cond_ in (\"<\", \">\", \"==\"):\n" \
+                                    "        operand_right = temp_stack.pop()\n" \
+                                    "        operand_left = temp_stack.pop()\n" \
+                                    "        if cond_ == \"=\":\n" \
+                                    "            cond_ = \"==\"\n" \
+                                    "        conditions.append(f\"{operand_left} {cond_} {operand_right}\")\n" \
+                                    "    else:\n" \
+                                    "        if not cond_.isdigit():\n" \
+                                    "            cond_ = \"{\" + cond_ + \"}\"\n" \
+                                    "        temp_stack.append(cond_)\n" \
+                                    "item_name_index_dict = {}\n" \
+                                    "for perm in itertools.permutations(range(1, len(items_name_list) + 1)):\n" \
+                                    "    item_name_index_dict = dict(zip(items_name_list, perm))\n" \
+                                    "    formatted_conditions = \\\n" \
+                                    "        [condition.format_map(item_name_index_dict) for condition in conditions]\n" \
+                                    "    if all(map(eval, formatted_conditions)):\n" \
+                                    "        break\n" \
+                                    f"{new_list_name} = list(item_name_index_dict.keys())\n" \
+                                    f"{new_list_name}.sort(key=item_name_index_dict.get, reverse=True)\n"
+
+                                self.list_stack.push(a_list, a_lname)
+                                self.list_stack.push(b_list, b_lname)
+                                self.list_stack.push(intermediate_list, new_list_name)
 
 
                         elif operator_name in ['[OP_LIST_SCALAR_ADD]', '[OP_LIST_SCALAR_MUL]']:
@@ -1696,25 +1739,8 @@ for i in range(len({temp_list1})):\n\
                                                                                         temp_list1=temp_lname1,
                                                                                         temp_list2=temp_lname2)
                             self.list_stack.push(intermediate_list, new_list_name)
-                        elif operator_name == '[OP_LIST_DIFF]':
-                            temp_list2, temp_lname2 = self.list_stack.pop()
-                            temp_list1, temp_lname1 = self.list_stack.pop()
-                            new_var_name = self.operand_names.pop()
-                            intermediate = -1
-                            for idx, (v1, v2) in enumerate(zip(temp_list1, temp_list2)):
-                                if v1 != v2:
-                                    intermediate = idx+1
-                                    break
-                            if intermediate == -1:
-                                raise ValueError
-                            self.operand_stack.push(intermediate, new_var_name)
-                            self.code_string += "\n{new_var_name} = -1\n\
-for idx, (v1, v2) in enumerate(zip({temp_list1}, {temp_list2})):\n\
-    if v1 != v2:\n\
-        {new_var_name} = idx+1\n\
-        break\n".format(new_var_name=new_var_name, temp_list1=temp_lname1, temp_list2=temp_lname2)
 
-                    elif operator_info[1]==3:
+                    elif operator_info[1] == 3:
                         if operator_name == '[OP_LIST_ARANGE]':
                             c, c_name = self.operand_stack.pop()
                             b, b_name = self.operand_stack.pop()
