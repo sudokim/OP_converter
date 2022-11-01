@@ -131,7 +131,7 @@ class PostfixConverter:
             '[OP_MEM]': ['mem', 2, 'aux'],
             # Working
             '[OP_LIST_ADD_COMB]': ['', 2, 'list_function'],  # :902
-            '[OP_LIST_DIFF]': [],
+            '[OP_LIST_DIFF]': ['', 2, 'list_function'],
         }
 
         self.operand_names = [f'var_{a}{b}' for a in ascii_lowercase for b in ascii_lowercase]
@@ -1012,7 +1012,26 @@ for i in range(1, num_sqrt+1):\n\
                             self.list_stack.push(temp_list, temp_list_name)
 
                         elif operator_name == '[OP_LIST_DIFF]':
-                            pass
+                            temp_list2, temp_lname2 = self.list_stack.pop()
+                            temp_list1, temp_lname1 = self.list_stack.pop()
+                            new_var_name = self.operand_names.pop(0)
+                            intermediate = -1
+                            for idx, (v1, v2) in enumerate(zip(temp_list1, temp_list2)):
+                                if v1 != v2:
+                                    intermediate = idx + 1
+                                    break
+                            if intermediate == -1:
+                                raise ValueError
+                            self.operand_stack.push(intermediate, new_var_name)
+                            self.code_string += "\n{new_var_name} = -1\n" \
+                                                "for idx, (v1, v2) in enumerate(zip({temp_list1}, {temp_list2})):\n" \
+                                                "    if v1 != v2:\n" \
+                                                "        {new_var_name} = idx+1\n" \
+                                                "        break\n".format(new_var_name=new_var_name,
+                                                                         temp_list1=temp_lname1,
+                                                                         temp_list2=temp_lname2)
+                            self.list_stack.push(temp_list1, temp_lname1)
+                            self.list_stack.push(temp_list2, temp_lname2)
 
                         else:
                             raise ValueError(f"unknown operator {operator_name}: {operator_info}")
@@ -1603,7 +1622,6 @@ else:\n\
                                 self.list_stack.push(b_list, b_lname)
                                 self.list_stack.push(intermediate_list, new_list_name)
 
-
                         elif operator_name in ['[OP_LIST_SCALAR_ADD]', '[OP_LIST_SCALAR_MUL]']:
                             a, a_name = self.operand_stack.pop()
                             temp_list, temp_lname = self.list_stack.pop()
@@ -2086,198 +2104,3 @@ else:\n\
             self.code_string += 'print({})'.format(name)
 
         return result, self.code_string
-
-# Previous [OP_LIST_COND_MAX_MIN] Implementation
-#                                 from queue import Queue
-#                                 condition_list = b_list
-#                                 condition_name = b_lname
-
-#                                 entity_list = a_list
-#                                 entity_name = a_lname
-
-#                                 input_dict = dict()
-#                                 for cnt, i in enumerate(entity_list):
-#                                     input_dict[i] = cnt
-#                                 input_reverse_dict = dict()
-#                                 for cnt, i in enumerate(entity_list):
-#                                     input_reverse_dict[cnt] = i
-#                                 adj_mat = []
-#                                 for _ in range(len(entity_list)):
-#                                     temp_list = []
-#                                     for _ in range(len(entity_list)):
-#                                         temp_list.append(0)
-#                                     adj_mat.append(temp_list)
-#                                 is_visited = []
-#                                 for _ in range(len(entity_list)):
-#                                     temp_list = []
-#                                     for _ in range(len(entity_list)):
-#                                         temp_list.append(0)
-#                                     is_visited.append(temp_list)
-#                                 que = Queue()
-#                                 iterate_num = len(condition_list)//3
-#                                 for i in range(iterate_num):
-#                                     operand_1 = condition_list[i*3]
-#                                     operand_2 = condition_list[i*3 + 1]
-#                                     operand_1_id = input_dict[operand_1]
-#                                     operand_2_id = input_dict[operand_2]
-#                                     operator = condition_list[i*3+2]
-#                                     if operator == '>':
-#                                         adj_mat[operand_1_id][operand_2_id] = 1
-#                                         is_visited[operand_1_id][operand_2_id] = 1
-#                                         que.put((operand_1_id, operand_2_id))
-
-#                                         adj_mat[operand_2_id][operand_1_id] = -1
-#                                         is_visited[operand_2_id][operand_1_id] = 1
-#                                         que.put((operand_2_id, operand_1_id))
-#                                     elif operator == '<':
-#                                         adj_mat[operand_1_id][operand_2_id] = -1
-#                                         is_visited[operand_1_id][operand_2_id] = 1
-#                                         que.put((operand_1_id, operand_2_id))
-
-#                                         adj_mat[operand_2_id][operand_1_id] = 1
-#                                         is_visited[operand_2_id][operand_1_id] = 1
-#                                         que.put((operand_2_id, operand_1_id))
-#                                 while not que.empty():
-#                                     operand_1, operand_2 = que.get()
-#                                     if adj_mat[operand_1][operand_2] == 1:
-#                                         for i in range(0, len(entity_list)):
-#                                             if (adj_mat[operand_1][i] == -1) and (not is_visited[operand_2][i]):
-#                                                 adj_mat[operand_2][i] = -1
-#                                                 adj_mat[i][operand_2] = 1
-#                                                 is_visited[operand_2][i] = 1
-#                                                 is_visited[i][operand_2] = 1
-#                                                 que.put((operand_2, i))
-#                                                 que.put((i, operand_2))
-#                                         for i in range(0, len(entity_list)):
-#                                             if (adj_mat[operand_2][i] == 1) and (not is_visited[operand_1][i]):
-#                                                 adj_mat[operand_1][i] = 1
-#                                                 adj_mat[i][operand_1] = -1
-#                                                 is_visited[operand_1][i] = 1
-#                                                 is_visited[i][operand_1] = 1
-#                                                 que.put((operand_1, i))
-#                                                 que.put((i, operand_1))
-#                                     if adj_mat[operand_1][operand_2] == -1:
-#                                         for i in range(0, len(entity_list)):
-#                                             if (adj_mat[operand_1][i] == 1) and (not is_visited[i][operand_2]):
-#                                                 adj_mat[i][operand_2] = -1
-#                                                 adj_mat[operand_2][i] = 1
-#                                                 is_visited[i][operand_2] = 1
-#                                                 is_visited[operand_2][i] = 1
-#                                                 que.put((i, operand_2))
-#                                                 que.put((operand_2, i))
-#                                         for i in range(0, len(entity_list)):
-#                                             if (adj_mat[operand_2][i] == -1) and (not is_visited[operand_1][i]):
-#                                                 adj_mat[operand_1][i] = -1
-#                                                 adj_mat[i][operand_1] = 1
-#                                                 is_visited[i][operand_1] = 1
-#                                                 is_visited[operand_1][i] = 1
-#                                                 que.put((operand_1, i))
-#                                                 que.put((i, operand_1))
-#                                 sum_list = [sum(i) for i in adj_mat]
-#                                 largest = -900
-#                                 largest_index = -1
-#                                 smallest = 900
-#                                 smallest_index = -1
-#                                 for cnt, i in enumerate(sum_list):
-#                                     if largest < i:
-#                                         largest = i
-#                                         largest_index = cnt
-#                                     if smallest > i:
-#                                         smallest = i
-#                                         smallest_index = cnt
-#                                 intermediate_list = []
-#                                 intermediate_list.append(input_reverse_dict[largest_index])
-#                                 intermediate_list.append(input_reverse_dict[smallest_index])
-#                                 self.code_string += "from queue import Queue\n\
-# input_dict = dict()\n\
-# for cnt, i in enumerate({entity_list}):\n\
-#     input_dict[i] = cnt\n\
-# input_reverse_dict = dict()\n\
-# for cnt, i in enumerate({entity_list}):\n\
-#     input_reverse_dict[cnt] = i\n\
-# adj_mat = []\n\
-# for _ in range(len({entity_list})):\n\
-#     temp_list = []\n\
-#     for _ in range(len({entity_list})):\n\
-#         temp_list.append(0)\n\
-#     adj_mat.append(temp_list)\n\
-# is_visited = []\n\
-# for _ in range(len({entity_list})):\n\
-#     temp_list = []\n\
-#     for _ in range(len({entity_list})):\n\
-#         temp_list.append(0)\n\
-#     is_visited.append(temp_list)\n\
-# que = Queue()\n\
-# iterate_num = len({condition_list})//3\n\
-# for i in range(iterate_num):\n\
-#     operand_1 = {condition_list}[i*3]\n\
-#     operand_2 = {condition_list}[i*3 + 1]\n\
-#     operand_1_id = input_dict[operand_1]\n\
-#     operand_2_id = input_dict[operand_2]\n\
-#     operator = {condition_list}[i*3+2]\n\
-#     if operator == '>':\n\
-#         adj_mat[operand_1_id][operand_2_id] = 1\n\
-#         is_visited[operand_1_id][operand_2_id] = 1\n\
-#         que.put((operand_1_id, operand_2_id))\n\
-#         adj_mat[operand_2_id][operand_1_id] = -1\n\
-#         is_visited[operand_2_id][operand_1_id] = 1\n\
-#         que.put((operand_2_id, operand_1_id))\n\
-#     elif operator == '<':\n\
-#         adj_mat[operand_1_id][operand_2_id] = -1\n\
-#         is_visited[operand_1_id][operand_2_id] = 1\n\
-#         que.put((operand_1_id, operand_2_id))\n\
-#         adj_mat[operand_2_id][operand_1_id] = 1\n\
-#         is_visited[operand_2_id][operand_1_id] = 1\n\
-#         que.put((operand_2_id, operand_1_id))\n\
-# while not que.empty():\n\
-#     operand_1, operand_2 = que.get()\n\
-#     if adj_mat[operand_1][operand_2] == 1:\n\
-#         for i in range(0, len({entity_list})):\n\
-#             if (adj_mat[operand_1][i] == -1) and (not is_visited[operand_2][i]):\n\
-#                 adj_mat[operand_2][i] = -1\n\
-#                 adj_mat[i][operand_2] = 1\n\
-#                 is_visited[operand_2][i] = 1\n\
-#                 is_visited[i][operand_2] = 1\n\
-#                 que.put((operand_2, i))\n\
-#                 que.put((i, operand_2))\n\
-#         for i in range(0, len({entity_list})):\n\
-#             if (adj_mat[operand_2][i] == 1) and (not is_visited[operand_1][i]):\n\
-#                 adj_mat[operand_1][i] = 1\n\
-#                 adj_mat[i][operand_1] = -1\n\
-#                 is_visited[operand_1][i] = 1\n\
-#                 is_visited[i][operand_1] = 1\n\
-#                 que.put((operand_1, i))\n\
-#                 que.put((i, operand_1))\n\
-#     if adj_mat[operand_1][operand_2] == -1:\n\
-#         for i in range(0, len({entity_list})):\n\
-#             if (adj_mat[operand_1][i] == 1) and (not is_visited[i][operand_2]):\n\
-#                 adj_mat[i][operand_2] = -1\n\
-#                 adj_mat[operand_2][i] = 1\n\
-#                 is_visited[i][operand_2] = 1\n\
-#                 is_visited[operand_2][i] = 1\n\
-#                 que.put((i, operand_2))\n\
-#                 que.put((operand_2, i))\n\
-#         for i in range(0, len({entity_list})):\n\
-#             if (adj_mat[operand_2][i] == -1) and (not is_visited[operand_1][i]):\n\
-#                 adj_mat[operand_1][i] = -1\n\
-#                 adj_mat[i][operand_1] = 1\n\
-#                 is_visited[i][operand_1] = 1\n\
-#                 is_visited[operand_1][i] = 1\n\
-#                 que.put((operand_1, i))\n\
-#                 que.put((i, operand_1))\n\
-# sum_list = [sum(i) for i in adj_mat]\n\
-# largest = -900\n\
-# largest_index = -1\n\
-# smallest = 900\n\
-# smallest_index = -1\n\
-# for cnt, i in enumerate(sum_list):\n\
-#     if largest < i:\n\
-#         largest = i\n\
-#         largest_index = cnt\n\
-#     if smallest > i:\n\
-#         smallest = i\n\
-#         smallest_index = cnt\n\
-# {intermediate_list} = []\n\
-# {intermediate_list}.append(input_reverse_dict[largest_index])\n\
-# {intermediate_list}.append(input_reverse_dict[smallest_index])\n".format(entity_list=entity_name, condition_list=condition_name, intermediate_list=new_list_name)
-#                             self.list_stack.push(intermediate_list, new_list_name) # SET 연산의 경우 set 연산 후 사용한 list는 삭제되고 결과값만 list stack에 저장됨.
