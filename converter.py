@@ -819,7 +819,9 @@ for c in candi:\n\
             ans_dict[k] = int(c[i])\n\
 {intermediate} = ans_dict[{x}]\n".format(intermediate=new_var_name, eq=eq_name, x=x_name)
                     elif operator_name == '[OP_GEN_POSSIBLE_LIST]':
-                        unk, unk_name = self.operand_stack.pop()
+                        temp_list, temp_list_name = self.list_stack.pop()
+
+                        unk = ''.join(map(str, temp_list))
                         unk = str(unk)
                         variable_candi = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
                                           'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
@@ -835,23 +837,24 @@ for c in candi:\n\
                                 intermediate_list.append(new_elem)
 
                         new_list_name = self.list_names.pop(0)
-                        self.operand_stack.push(unk, unk_name)
+                        self.list_stack.push(temp_list, temp_list_name)
                         self.list_stack.push(intermediate_list, new_list_name)
                         self.code_string += "ans_dict = dict()\n\
-{unk} = str({unk})\n\
+unk = ''.join({temp_list_name})\n\
+unk = str(unk)\n\
 {intermediate_list} = []\n\
 variable_candi = set(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'])\n\
-for v in set({unk}):\n\
+for v in set(unk):\n\
     if v in variable_candi:\n\
         ans_dict[v] = 0\n\
 candi = list(itertools.product('0123456789', repeat=len(ans_dict)))\n\
 for c in candi:\n\
-    temp = {unk}\n\
+    temp = unk\n\
     for i, (k, _) in enumerate(ans_dict.items()):\n\
         temp = temp.replace(k, str(c[i]))\n\
-    if len({unk}) == len(str(int(temp))):\n\
+    if len(unk) == len(str(int(temp))):\n\
         new_elem = int(temp)\n\
-        {intermediate_list}.append(new_elem)\n".format(unk=unk_name, intermediate_list=new_list_name)
+        {intermediate_list}.append(new_elem)\n".format(temp_list_name=temp_list_name, intermediate_list=new_list_name)
 
                 elif operator_info[2] == 'list_function':
                     if operator_info[1] == 0:  # OP_LIST_PRIME
