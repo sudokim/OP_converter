@@ -1,4 +1,4 @@
-Index	유형	세부 유형	기본 유형	난이도	예시 문제	OP Equation	Infix	Check	Labeling 필요	Anwer
+Index	유형	세부 유형	기본 유형	난이도	예시 문제	OP Equation	Infix	Check	Labeling 필요	Answer
 1	주고 받기	기본	산술	3	유정이는 공책을 몇 권 가지고 있었습니다. 그중에서 언니에게 5권을 주고, 남은 것의 절반을 동생에게 주었습니다. 공책이 4권 남았다면 처음에 유정이는 공책을 몇 권 가지고 있었습니까	4 2 [OP_MUL] 5 [OP_ADD]	ans = 4 * 2 + 5	#ERROR!		13
 1_증강	주고 받기	기본	산술	3	유정이가 처음 가지고 있던 공책에서 5권을 언니에게 주고, 이후 남은 것의 반을 동생에게 주었습니다. 마지막에 남은 공책의 수를 세어 보았더니 4권이었습니다. 유정이가 처음에 가지고 있던 공책의 수는 몇 권일까요?	4 2 [OP_MUL] 5 [OP_ADD]	ans = 4 * 2 + 5	#NAME?		13
 2	주고 받기	기본	산술	2	사탕이 23개 있었습니다. 그중에서 유나가 몇 개를 먹었더니 7개가 남았습니다. 유나가 먹은 사탕은 몇 개입니까?	23 7 [OP_SUB]	ans = 23 - 7	#ERROR!		16
@@ -786,7 +786,11 @@ Index	유형	세부 유형	기본 유형	난이도	예시 문제	OP Equation	Inf
 393	연립방정식	기본	산술	3	서로 다른 두 수가 있습니다. 이 두 수의 합은 15이고, 차는 3입니다. 이 두 수의 곱은 얼마입니까?	15 3 	x,y=sympy.symbols("x y") eq1=sympy.Eq( x + y , 15 ) eq2=sympy.Eq( x - y , 3 ) res=sympy.solve( [eq1,eq2] ) ans = res[x] * res[y]	3	TRUE	
 393_증강	연립방정식	기본	산술	3	두 수의 합은 15이고, 차는 3입니다. 이 두수는 서로 다릅니다. 두 수의 곱은 얼마입니까?	A B [OP_ADD] 15 A B [OP_SUB] 3	x,y=sympy.symbols("x y") eq1=sympy.Eq( x + y , 15 ) eq2=sympy.Eq( x - y , 3 ) res=sympy.solve( [eq1,eq2] ) ans = res[x] * res[y]	#ERROR!	TRUE	
 394	연립방정식	기본	산술	3	서로 다른 두 자연수가 있습니다. 이 두 수의 합은 7이고, 차는 3입니다. 이 두 수의 곱은 얼마인지 구하시오.	[OP_LIST_SOL] A B + = 7 # A B - = 3 [OP_LIST_EOL] [OP_SYM_EQ] A [OP_DICT_GET] B [OP_DICT_GET] [OP_MUL]	x,y=sympy.symbols("x y") eq1=sympy.Eq( x + y , 7 ) eq2=sympy.Eq( x - y , 3 ) res=sympy.solve( [eq1,eq2] ) ans = res[x] * res[y]	ERROR	TRUE	
-394_증강	연립방정식	기본	산술	3	서로 다른 두 자연수를 더하면 7이고, 큰 수에서 작은 수를 빼면 3입니다. 두 수를 곱한 값은 얼마입니까?	[OP_LIST_SOL] A B + = 7 # A B - = 3 [OP_LIST_EOL] [OP_SYM_EQ] A [OP_DICT_GET] B [OP_DICT_GET] [OP_MUL]	x,y=sympy.symbols("x y") eq1=sympy.Eq( x + y , 7 ) eq2=sympy.Eq( x - y , 3 ) res=sympy.solve( [eq1,eq2] ) ans = res[x] * res[y]	#NAME?	TRUE	
+394_증강	연립방정식	기본	산술	3	서로 다른 두 자연수를 더하면 7이고, 큰 수에서 작은 수를 빼면 3입니다. 두 수를 곱한 값은 얼마입니까?	[OP_LIST_SOL] A B + = 7 # A B - = 3 [OP_LIST_EOL] [OP_SYM_EQ] A [OP_DICT_GET] B [OP_DICT_GET] [OP_MUL]	x,y=sympy.symbols("x y")
+ eq1=sympy.Eq( x + y , 7 )
+ eq2=sympy.Eq( x - y , 3 )
+ res=sympy.solve( [eq1,eq2] )
+ ans = res[x] * res[y]	#NAME?	TRUE	
 395	연립방정식	기본	산술	3	서로 다른 두 자연수가 있습니다. 이 두 수의 합은 12이고, 차는 4입니다. 이 두 수 중에서 큰 수를 작은 수로 나눈 몫은 얼마인지 구하시오.	[OP_LIST_SOL] A B + = 12 # A B - = 4 [OP_LIST_EOL] [OP_SYM_EQ] A [OP_DICT_GET] B [OP_DICT_GET] [OP_FDIV]	x,y=sympy.symbols("x y") eq1=sympy.Eq( x + y , 12 ) eq2=sympy.Eq( x - y , 4 ) res=sympy.solve( [eq1,eq2] ) ans = max(res.values()) // min(res.values())	#ERROR!	TRUE	
 395_증강	연립방정식	기본	산술	3	서로 다른 자연수 A와 B의 합은 12이고 차는 4입니다. 둘 중 큰 수를 작은 수로 나눈 몫은 얼마입니까?	[OP_LIST_SOL] A B + = 12 # A B - = 4 [OP_LIST_EOL] [OP_SYM_EQ] A [OP_DICT_GET] B [OP_DICT_GET] [OP_FDIV]	x,y=sympy.symbols("x y") eq1=sympy.Eq( x + y , 12 ) eq2=sympy.Eq( x - y , 4 ) res=sympy.solve( [eq1,eq2] ) ans = max(res.values()) // min(res.values())	ERROR	TRUE	
 396	연립방정식	기본	산술	3	감과 귤이 모두 합해서 129개 있습니다. 감이 귤보다 43개 더 적다면 감은 몇 개 있습니까?	[OP_LIST_SOL] 감 귤 + = 129 # 귤 감 - = 43 [OP_LIST_EOL] [OP_SYM_EQ] 감 [OP_DICT_GET]	x,y=sympy.symbols("x y") eq1=sympy.Eq( x + y , 129 ) eq2=sympy.Eq( x - y , 43 ) res=sympy.solve( [eq1,eq2] ) ans= res[y]	#ERROR!	TRUE	
@@ -805,10 +809,30 @@ Index	유형	세부 유형	기본 유형	난이도	예시 문제	OP Equation	Inf
 402_증강	연립방정식	기본	산술	4	검은색 공 3개와 흰색 공 4개의 무게 합은 68그램(g)입니다. 흰색 공 2개와 검은색 공 3개의 무게의 합이 46이라면 흰색 공 한개의 무게는 몇 그램(g)입니까?	[OP_LIST_SOL] 검은색 3 * 흰색 4 * + = 68 # 흰색 2 * 검은색 3 * + = 46 [OP_LIST_EOL] [OP_SYM_EQ] 흰색 [OP_DICT_GET]	x,y=sympy.symbols("x y") eq1= sympy.Eq( 4 * x + 3 * y , 68 ) eq2 = sympy.Eq( 2 * x + 3 * y , 46 ) ans = sympy.solve([ eq1, eq2 ])[x]	#NAME?	TRUE	
 403	연립방정식	기본	산술	6	세 수 A, B, C가 있습니다. A와 B와 C의 합은 450이고, A와 B의 합은 330입니다. 또 A와 C의 합이 270일 때, B를 구하시오.	[OP_LIST_SOL] A B + C + = 450 # A B + = 330 # A C + = 270 [OP_LIST_EOL] [OP_SYM_EQ] B [OP_DICT_GET]	x,y,z=sympy.symbols("x y z") eq1=sympy.Eq( 1 * x + 1 * y + 1 * z , 450 ) eq2=sympy.Eq( 1 * x + 1 * y , 330 ) eq3=sympy.Eq( 1 * x + 1 * z , 270 ) res=sympy.solve( [eq1,eq2,eq3] ) ans= res[y]	#ERROR!	TRUE	
 403_증강	연립방정식	기본	산술	6	A, B, C를 더하면 450이고, A랑 B만 더하면 330입니다. A랑 C만 더하면 270일 때, B는 얼마입니까?	[OP_LIST_SOL] A B + C + = 450 # A B + = 330 # A C + = 270 [OP_LIST_EOL] [OP_SYM_EQ] B [OP_DICT_GET]	x,y,z=sympy.symbols("x y z") eq1=sympy.Eq( 1 * x + 1 * y + 1 * z , 450 ) eq2=sympy.Eq( 1 * x + 1 * y , 330 ) eq3=sympy.Eq( 1 * x + 1 * z , 270 ) res=sympy.solve( [eq1,eq2,eq3] ) ans= res[y]	#NAME?	TRUE	
-404	연립방정식	기본	산술	6	세 수 A, B, C가 있습니다. A와 B의 합은 80이고, A와 C의 합은 100입니다. 또 B와 C의 합이 120일 때, B를 구하시오.	[OP_LIST_SOL] A B [OP_ADD] = 80 # A C + = 100 # B C + = 120 [OP_LIST_EOL] [OP_SYM_EQ] B [OP_DICT_GET]	x,y,z=sympy.symbols("x y z") eq1=sympy.Eq( 1 * x + 1 * y , 80 ) eq2=sympy.Eq( 1 * x + 1 * z , 100 ) eq3=sympy.Eq( 1 * y + 1 * z , 120 ) res=sympy.solve( [eq1,eq2,eq3] ) ans= res[y]	#NAME?	TRUE	
-404_증강	연립방정식	기본	산술	6	A+B는 80, A+C는 100, B+C는 120을 만족합니다. B는 얼마입니까?	[OP_LIST_SOL] A B + = 80 # A C + = 100 # B C + = 120 [OP_LIST_EOL] [OP_SYM_EQ] B [OP_DICT_GET]	x,y,z=sympy.symbols("x y z") eq1=sympy.Eq( 1 * x + 1 * y , 80 ) eq2=sympy.Eq( 1 * x + 1 * z , 100 ) eq3=sympy.Eq( 1 * y + 1 * z , 120 ) res=sympy.solve( [eq1,eq2,eq3] ) ans= res[y]	#ERROR!	TRUE	
-405	연립방정식	기본	산술	6	축구공, 야구공, 탁구공의 개수의 합은 480개입니다. 축구공과 야구공의 개수의 차는 100개입니다. 또 축구공과 탁구공의 개수의 합은 300개입니다. 탁구공은 몇 개입니까?	300 480 300 [OP_SUB] 100 [OP_ADD] [OP_SUB]	x,y,z=sympy.symbols("x y z") eq1=sympy.Eq( 1 * x + 1 * y + 1 * z , 480 ) eq2=sympy.Eq( 1 * x + 1 * y , 350 ) eq3=sympy.Eq( 1 * x + 1 * z , 300 ) res=sympy.solve( [eq1,eq2,eq3] ) ans= res[z]	#ERROR!	TRUE	
-405_증강	연립방정식	기본	산술	6	현수네 학교에는 축구공, 야구공, 탁구공이 각각 a, b, c개씩 있습니다. 축구공의 개수에서 야구공의 개수를 빼면 100이고, 축구공과 탁구공의 개수를 더하면 300입니다. 공의 수가 모두 480개라면, 이 중 탁구공은 몇 개입니까?		x,y,z=sympy.symbols("x y z") eq1=sympy.Eq( 1 * x + 1 * y + 1 * z , 480 ) eq2=sympy.Eq( 1 * x + 1 * y , 350 ) eq3=sympy.Eq( 1 * x + 1 * z , 300 ) res=sympy.solve( [eq1,eq2,eq3] ) ans= res[z]		TRUE	
+404	연립방정식	기본	산술	6	세 수 A, B, C가 있습니다. A와 B의 합은 80이고, A와 C의 합은 100입니다. 또 B와 C의 합이 120일 때, B를 구하시오.	[OP_LIST_SOL] A B [OP_ADD] = 80 # A C + = 100 # B C + = 120 [OP_LIST_EOL] [OP_SYM_EQ] B [OP_DICT_GET]	x,y,z=sympy.symbols("x y z")
+ eq1=sympy.Eq( 1 * x + 1 * y , 80 )
+ eq2=sympy.Eq( 1 * x + 1 * z , 100 )
+ eq3=sympy.Eq( 1 * y + 1 * z , 120 )
+ res=sympy.solve( [eq1,eq2,eq3] )
+ ans= res[y]	#NAME?	TRUE	
+404_증강	연립방정식	기본	산술	6	A+B는 80, A+C는 100, B+C는 120을 만족합니다. B는 얼마입니까?	[OP_LIST_SOL] A B + = 80 # A C + = 100 # B C + = 120 [OP_LIST_EOL] [OP_SYM_EQ] B [OP_DICT_GET]	x,y,z=sympy.symbols("x y z")
+ eq1=sympy.Eq( 1 * x + 1 * y , 80 )
+ eq2=sympy.Eq( 1 * x + 1 * z , 100 )
+ eq3=sympy.Eq( 1 * y + 1 * z , 120 )
+ res=sympy.solve( [eq1,eq2,eq3] )
+ ans= res[y]	#ERROR!	TRUE	
+405	연립방정식	기본	산술	6	축구공, 야구공, 탁구공의 개수의 합은 480개입니다. 축구공과 야구공의 개수의 차는 100개입니다. 또 축구공과 탁구공의 개수의 합은 300개입니다. 탁구공은 몇 개입니까?	300 480 300 [OP_SUB] 100 [OP_ADD] [OP_SUB]	x,y,z=sympy.symbols("x y z")
+ eq1=sympy.Eq( 1 * x + 1 * y + 1 * z , 480 )
+ eq2=sympy.Eq( 1 * x + 1 * y , 350 )
+ eq3=sympy.Eq( 1 * x + 1 * z , 300 )
+ res=sympy.solve( [eq1,eq2,eq3] )
+ ans= res[z]	#ERROR!	TRUE	
+405_증강	연립방정식	기본	산술	6	현수네 학교에는 축구공, 야구공, 탁구공이 각각 a, b, c개씩 있습니다. 축구공의 개수에서 야구공의 개수를 빼면 100이고, 축구공과 탁구공의 개수를 더하면 300입니다. 공의 수가 모두 480개라면, 이 중 탁구공은 몇 개입니까?		x,y,z=sympy.symbols("x y z")
+ eq1=sympy.Eq( 1 * x + 1 * y + 1 * z , 480 )
+ eq2=sympy.Eq( 1 * x + 1 * y , 350 )
+ eq3=sympy.Eq( 1 * x + 1 * z , 300 )
+ res=sympy.solve( [eq1,eq2,eq3] )
+ ans= res[z]		TRUE	
 406	연립방정식	기본	산술	6	사탕과 과자의 개수의 합은 120개이고, 사탕과 빵의 개수의 합은 100개입니다. 또 과자와 빵의 개수의 합이 140개입니다. 빵은 몇 개입니까?	120 100 140 [OP_ADD] [OP_ADD] 2 [OP_DIV] 120 [OP_SUB]	x,y,z=sympy.symbols("x y z") eq1=sympy.Eq( 1 * x + 1 * y , 120 ) eq2=sympy.Eq( 1 * x + 1 * z , 100 ) eq3=sympy.Eq( 1 * y + 1 * z , 140 ) res=sympy.solve( [eq1,eq2,eq3] ) ans= res[z]	#ERROR!	TRUE	
 406_증강	연립방정식	기본	산술	6	사탕의 개수와 과자의 개수를 합하면 120개이고, 빵의 개수와 사탕의 개수를 합하면 100개입니다. 또 빵과 과자의 개수를 합하면 140개입니다. 빵은 몇 개인지 구하시오.		x,y,z=sympy.symbols("x y z") eq1=sympy.Eq( 1 * x + 1 * y , 120 ) eq2=sympy.Eq( 1 * x + 1 * z , 100 ) eq3=sympy.Eq( 1 * y + 1 * z , 140 ) res=sympy.solve( [eq1,eq2,eq3] ) ans= res[z]		TRUE	
 407	연립방정식	기본	산술	6	귤과 배의 개수의 합은 90개이고, 귤과 감의 개수의 합은 110개입니다. 또 배와 감의 개수의 합은 100개입니다. 귤은 몇 개입니까?	90 110 100 [OP_ADD] [OP_ADD] 2 [OP_DIV] 100 [OP_SUB]	x,y,z=sympy.symbols("x y z") eq1=sympy.Eq( 1 * x + 1 * y , 90 ) eq2=sympy.Eq( 1 * x + 1 * z , 110 ) eq3=sympy.Eq( 1 * y + 1 * z , 100 ) res=sympy.solve( [eq1,eq2,eq3] ) ans= res[x]	50	TRUE	
