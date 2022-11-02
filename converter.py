@@ -824,8 +824,7 @@ for c in candi:\n\
                         temp_list, temp_lname = self.list_stack.pop()
                         unk = map(str, temp_list)
                         unk = ''.join(unk)
-                        
-                        
+
                         variable_candi = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
                                           'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}
                         ans_dict = {v: 0 for v in set(unk) & variable_candi}
@@ -857,7 +856,7 @@ for c in candi:\n\
         temp = temp.replace(k, str(c[i]))\n\
     if len(unk) == len(str(int(temp))):\n\
         new_elem = int(temp)\n\
-        {intermediate_list}.append(new_elem)\n".format(temp_list = temp_lname, intermediate_list=new_list_name)
+        {intermediate_list}.append(new_elem)\n".format(temp_list=temp_lname, intermediate_list=new_list_name)
 
                 elif operator_info[2] == 'list_function':
                     if operator_info[1] == 0:  # OP_LIST_PRIME
@@ -1778,14 +1777,14 @@ for i in range(len({temp_list1})):\n\
                                                                                                    b_name, c_name)
                             self.list_stack.push(intermediate_list, list_name)
                         elif operator_name == '[OP_LIST_FIND_UNK]':
-                            b, b_name = self.operand_stack.pop()
-                            a, a_name = self.operand_stack.pop()
-                            temp_list, temp_lname = self.list_stack.pop()
+                            a, a_name = self.operand_stack.pop()  # Character to find
+                            temp_list, temp_lname = self.list_stack.pop()  # Unknown digit
+                            cand_list, cand_lname = self.list_stack.pop()  # Candidate list
                             a = str(a)
-                            b = str(b)
-                            unk_idx = a.index(b)
+                            temp_list = [str(i) for i in temp_list]
+                            unk_idx = temp_list.index(a)
                             intermediate = []
-                            for elem in temp_list:
+                            for elem in cand_list:
                                 elem = str(elem)
                                 intermediate.append(int(elem[unk_idx]))
                             intermediate = list(set(intermediate))
@@ -1794,28 +1793,39 @@ for i in range(len({temp_list1})):\n\
 
                             if isinstance(intermediate, list):
                                 new_list_name = self.list_names.pop(0)
+                                self.list_stack.push(cand_list, cand_lname)
                                 self.list_stack.push(temp_list, temp_lname)
                                 self.list_stack.push(intermediate, new_list_name)
-                                self.code_string += '{a} = str({a})\n\
-{b} = str({b})\n\
-unk_idx = {a}.index({b})\n\
-{intermediate_list} = []\n\
-for elem in {temp_list}:\n\
-    elem = str(elem)\n\
-    {intermediate_list}.append(int(elem[unk_idx]))\n\
-{intermediate_list} = list(set({intermediate_list}))\n'.format(a=a_name, b=b_name, intermediate_list=new_list_name,
-                                                               temp_list=temp_lname)
+                                self.code_string += \
+                                    "{a} = str({a})\n" \
+                                    "{temp_lname} = [str(i) for i in {temp_lname}]\n" \
+                                    "unk_idx = {temp_lname}.index({a})\n" \
+                                    "{intermediate} = []\n" \
+                                    "for elem in {cand_lname}:\n" \
+                                    "    elem = str(elem)\n" \
+                                    "    {intermediate}.append(int(elem[unk_idx]))\n" \
+                                    "{intermediate} = list(set({intermediate}))\n".format(
+                                            a=a_name, temp_lname=temp_lname, cand_lname=cand_lname,
+                                            intermediate=new_list_name,
+                                    )
                             else:
                                 new_var_name = self.operand_names.pop(0)
+                                self.list_stack.push(cand_list, cand_lname)
                                 self.list_stack.push(temp_list, temp_lname)
                                 self.operand_stack.push(intermediate, new_var_name)
-                                self.code_string += '{a} = str({a})\n\
-{b} = str({b})\n\
-unk_idx = {a}.index({b})\n\
-{intermediate} = 0\n\
-for elem in {temp_list}:\n\
-    elem = str(elem)\n\
-    {intermediate} = int(elem[unk_idx])\n'.format(a=a_name, b=b_name, intermediate=new_var_name, temp_list=temp_lname)
+                                self.code_string += \
+                                    "{a} = str({a})\n" \
+                                    "{temp_lname} = [str(i) for i in {temp_lname}]\n" \
+                                    "unk_idx = {temp_lname}.index({a})\n" \
+                                    "{intermediate} = []\n" \
+                                    "for elem in {cand_lname}:\n" \
+                                    "    elem = str(elem)\n" \
+                                    "    {intermediate}.append(int(elem[unk_idx]))\n" \
+                                    "{intermediate} = list(set({intermediate}))[0]\n".format(
+                                            a=a_name, temp_lname=temp_lname, cand_lname=cand_lname,
+                                            intermediate=new_var_name,
+                                    )
+
                         elif operator_name == '[OP_LIST_DIVIDE_AND_REMAIN]':
                             b, b_name = self.operand_stack.pop()
                             a, a_name = self.operand_stack.pop()
