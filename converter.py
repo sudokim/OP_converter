@@ -1540,9 +1540,9 @@ else:\n\
                                 conditions = []
                                 condition_list = b_list.copy()
                                 temp_stack = []  # Temporary stack for processing postfix conditions
-                                for index_, cond_ in enumerate(condition_list):
+                                for index_, cond_ in enumerate(map(str, condition_list)):
                                     try:
-                                        if cond_ in ("<", ">", "=="):
+                                        if cond_ in ("<", ">", "="):
                                             # Operator
                                             operand_right = temp_stack.pop()
                                             operand_left = temp_stack.pop()
@@ -1600,8 +1600,8 @@ else:\n\
                                     "conditions = []\n" \
                                     f"condition_list = {b_lname}.copy()\n" \
                                     "temp_stack = []\n" \
-                                    "for index_, cond_ in enumerate(condition_list):\n" \
-                                    "    if cond_ in (\"<\", \">\", \"==\"):\n" \
+                                    "for index_, cond_ in enumerate(map(str, condition_list)):\n" \
+                                    "    if cond_ in (\"<\", \">\", \"=\"):\n" \
                                     "        operand_right = temp_stack.pop()\n" \
                                     "        operand_left = temp_stack.pop()\n" \
                                     "        if cond_ == \"=\":\n" \
