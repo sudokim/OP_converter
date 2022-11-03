@@ -1,4 +1,4 @@
-Problem,Solution,Answer
+﻿Problem,Solution,Answer
 길이가 1미터(m) 50센티미터(㎝)인 철사를 석기와 예슬이가 나누어 가지려고 합니다. 석기가 예슬이보다 16센티미터(㎝) 더 짧게 가지려면 석기는 몇 센티미터(㎝)를 가지면 됩니까?,1 100 [OP_MUL] 50 [OP_ADD] 16 [OP_SUB] 2 [OP_DIV],67
 어느 왕수학 학원에서 킬로미터(㎞)A 수학학력평가에 120명이 응시하였습니다. 이 중 상장을 받은 학생이 상장을 받지 못한 학생보다 36명이 더 많았다면 상장을 받은 학생은 몇 명입니까?,120 36 [OP_SUB] 2 [OP_DIV] 36 [OP_ADD],78
 "아버지에게 형과 동생이 각각 용돈을 받았습니다. 두 사람이 받은 용돈의 합은 12000원이고, 형이 동생보다 1000원 더 많이 받았다면, 형이 받은 용돈은 얼마입니까?",12000 1000 [OP_SUB] 2 [OP_DIV] 1000 [OP_ADD],6500
@@ -1365,27 +1365,27 @@ Problem,Solution,Answer
 "연속하는 두 자연수의 합이 39일 때, 두 자연수 중 큰 수를 구하시오.",39 1 [OP_ADD] 1 1 [OP_ADD] [OP_DIV],20
 연속하는 두 홀수의 합이 48일 때 두 홀수 중 작은 수를 구하시오.,48 2 [OP_SUB] 1 1 [OP_ADD] [OP_DIV],23
 "연속하는 세 자연수의 합이 30일 때, 세 자연수 중 중간 수를 구하시오.",30 0 3 1 [OP_SUB] 1 [OP_LIST_ARANGE] [OP_LIST_SUM] [OP_SUB] 3 [OP_DIV] 3 2 [OP_FDIV] [OP_ADD],10
-11A3을 버림하여 십의 자리까지 나타내면 1130이 됩니다. A를 구하시오.,[OP_LIST_SOL] 1 1 A 3 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 1130 [OP_LIST_MORE_EQUAL] 1130 10 [OP_ADD] [OP_LIST_LESS] 11A3 A [OP_LIST_FIND_UNK],3
-17A7을 버림하여 십의 자리까지 나타내면 1710이 됩니다. A를 구하시오.,[OP_LIST_SOL] 1 7 A 7 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 1710 [OP_LIST_MORE_EQUAL] 1710 10 [OP_ADD] [OP_LIST_LESS] 17A7 A [OP_LIST_FIND_UNK],1
-1A69를 버림하여 백의 자리까지 나타내면 1600이 됩니다. A를 구하시오.,[OP_LIST_SOL] 1 A 6 9 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 1600 [OP_LIST_MORE_EQUAL] 1600 100 [OP_ADD] [OP_LIST_LESS] 1A69 A [OP_LIST_FIND_UNK],6
-1A77을 버림하여 백의 자리까지 나타내면 1700이 됩니다. A를 구하시오.,[OP_LIST_SOL] 1 A 7 7 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 1700 [OP_LIST_MORE_EQUAL] 1700 100 [OP_ADD] [OP_LIST_LESS] 1A77 A [OP_LIST_FIND_UNK],7
-1A91을 올림하여 백의 자리까지 나타내면 1700이 됩니다. A를 구하시오.,[OP_LIST_SOL] 1 A 9 1 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 1700 [OP_LIST_LESS_EQUAL] 1700 100 [OP_SUB] [OP_LIST_MORE] 1A91 A [OP_LIST_FIND_UNK],6
-22A3을 버림하여 십의 자리까지 나타내면 2230이 됩니다. A를 구하시오.,[OP_LIST_SOL] 2 2 A 3 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 2230 [OP_LIST_MORE_EQUAL] 2230 10 [OP_ADD] [OP_LIST_LESS] 22A3 A [OP_LIST_FIND_UNK],3
-23A2를 십의 자리에서 버림하면 2320이 됩니다. A를 구하시오.,[OP_LIST_SOL] 2 3 A 2 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 2320 [OP_LIST_MORE_EQUAL] 2320 10 [OP_ADD] [OP_LIST_LESS] 23A2 A [OP_LIST_FIND_UNK],2
-25A7를 올림하여 십의 자리까지 나타내면 2570이 됩니다. A를 구하시오.,[OP_LIST_SOL] 2 5 A 7 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 2570 [OP_LIST_LESS_EQUAL] 2570 10 [OP_SUB] [OP_LIST_MORE] 25A7 A [OP_LIST_FIND_UNK],6
-2A1를 버림하여 십의 자리까지 나타내면 230이 됩니다. A를 구하시오.,[OP_LIST_SOL] 2 A 1 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 230 [OP_LIST_MORE_EQUAL] 230 10 [OP_ADD] [OP_LIST_LESS] 2A1 A [OP_LIST_FIND_UNK],3
-2A3을 버림하여 십의 자리까지 나타내면 280이 됩니다. A를 구하시오.,[OP_LIST_SOL] 2 A 3 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 280 [OP_LIST_MORE_EQUAL] 280 10 [OP_ADD] [OP_LIST_LESS] 2A3 A [OP_LIST_FIND_UNK],8
-34A5를 버림하여 십의 자리까지 나타내면 3420이 됩니다. A를 구하시오.,[OP_LIST_SOL] 3 4 A 5 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 3420 [OP_LIST_MORE_EQUAL] 3420 10 [OP_ADD] [OP_LIST_LESS] 34A5 A [OP_LIST_FIND_UNK],2
-3A96을 버림하여 백의 자리까지 나타내면 3100이 됩니다. A를 구하시오.,[OP_LIST_SOL] 3 A 9 6 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 3100 [OP_LIST_MORE_EQUAL] 3100 100 [OP_ADD] [OP_LIST_LESS] 3A96 A [OP_LIST_FIND_UNK],1
-48A8을 십의 자리에서 반올림하면 4900이 됩니다. 0부터 9까지의 숫자 중 A에 쓸 수 있는 숫자는 모두 몇 개입니까?,[OP_LIST_SOL] 4 8 A 8 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 4900 50 [OP_ADD] [OP_LIST_LESS] 4900 50 [OP_SUB] [OP_LIST_MORE_EQUAL] 48A8 A [OP_LIST_FIND_UNK] [OP_LIST_LEN],5
-6A35를 버림하여 백의 자리까지 나타내면 6100이 됩니다. A를 구하시오.,[OP_LIST_SOL] 6 A 3 5 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 6100 [OP_LIST_MORE_EQUAL] 6100 100 [OP_ADD] [OP_LIST_LESS] 6A35 A [OP_LIST_FIND_UNK],1
-6A76을 버림하여 백의 자리까지 나타내면 6800이 됩니다. A를 구하시오.,[OP_LIST_SOL] 6 A 7 6 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 6800 [OP_LIST_MORE_EQUAL] 6800 100 [OP_ADD] [OP_LIST_LESS] 6A76 A [OP_LIST_FIND_UNK],8
-73A94를 백의 자리에서 반올림하면 74000이 된다고 합니다. A에 들어갈 수 있는 숫자는 모두 몇 개입니까?,[OP_LIST_SOL] 7 3 A 9 4 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 74000 [OP_LIST_LESS] 74000 500 [OP_SUB] [OP_LIST_MORE_EQUAL] 73A94 A [OP_LIST_FIND_UNK] [OP_LIST_LEN],5
-7A7을 올림하여 십의 자리까지 나타내면 730이 됩니다. A를 구하시오.,[OP_LIST_SOL] 7 A 7 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 730 [OP_LIST_LESS_EQUAL] 730 10 [OP_SUB] [OP_LIST_MORE] 7A7 A [OP_LIST_FIND_UNK],2
-8A4를 올림하여 십의 자리까지 나타내면 870이 됩니다. A를 구하시오.,[OP_LIST_SOL] 8 A 4 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 870 [OP_LIST_LESS_EQUAL] 870 10 [OP_SUB] [OP_LIST_MORE] 8A4 A [OP_LIST_FIND_UNK],6
-세 자리수 A27을 백의 자리에서 버림하면 200이 됩니다. A를 구하시오.,[OP_LIST_SOL] A 2 7 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 200 [OP_LIST_MORE_EQUAL] 200 100 [OP_ADD] [OP_LIST_LESS] A27 A [OP_LIST_FIND_UNK],2
-A567을 십의 자리에서 버림하면 2560이 됩니다. A를 구하시오.,[OP_LIST_SOL] A 5 6 7 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 2000 [OP_LIST_MORE_EQUAL] 2000 10 [OP_ADD] [OP_LIST_LESS] A567 A [OP_LIST_FIND_UNK],2
-A76을 백의 자리에서 버림하면 700이 됩니다. A를 구하시오.,[OP_LIST_SOL] A 7 6 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 700 [OP_LIST_MORE_EQUAL] 700 100 [OP_ADD] [OP_LIST_LESS] A76 A [OP_LIST_FIND_UNK],7
+11A3을 버림하여 십의 자리까지 나타내면 1130이 됩니다. A를 구하시오.,11A3 [OP_GEN_POSSIBLE_LIST] 1130 [OP_LIST_MORE_EQUAL] 1130 10 [OP_ADD] [OP_LIST_LESS] 11A3 A [OP_LIST_FIND_UNK],3
+17A7을 버림하여 십의 자리까지 나타내면 1710이 됩니다. A를 구하시오.,17A7 [OP_GEN_POSSIBLE_LIST] 1710 [OP_LIST_MORE_EQUAL] 1710 10 [OP_ADD] [OP_LIST_LESS] 17A7 A [OP_LIST_FIND_UNK],1
+1A69를 버림하여 백의 자리까지 나타내면 1600이 됩니다. A를 구하시오.,1A69 [OP_GEN_POSSIBLE_LIST] 1600 [OP_LIST_MORE_EQUAL] 1600 100 [OP_ADD] [OP_LIST_LESS] 1A69 A [OP_LIST_FIND_UNK],6
+1A77을 버림하여 백의 자리까지 나타내면 1700이 됩니다. A를 구하시오.,1A77 [OP_GEN_POSSIBLE_LIST] 1700 [OP_LIST_MORE_EQUAL] 1700 100 [OP_ADD] [OP_LIST_LESS] 1A77 A [OP_LIST_FIND_UNK],7
+1A91을 올림하여 백의 자리까지 나타내면 1700이 됩니다. A를 구하시오.,1A91 [OP_GEN_POSSIBLE_LIST] 1700 [OP_LIST_LESS_EQUAL] 1700 100 [OP_SUB] [OP_LIST_MORE] 1A91 A [OP_LIST_FIND_UNK],6
+22A3을 버림하여 십의 자리까지 나타내면 2230이 됩니다. A를 구하시오.,22A3 [OP_GEN_POSSIBLE_LIST] 2230 [OP_LIST_MORE_EQUAL] 2230 10 [OP_ADD] [OP_LIST_LESS] 22A3 A [OP_LIST_FIND_UNK],3
+23A2를 십의 자리에서 버림하면 2320이 됩니다. A를 구하시오.,23A2 [OP_GEN_POSSIBLE_LIST] 2320 [OP_LIST_MORE_EQUAL] 2320 10 [OP_ADD] [OP_LIST_LESS] 23A2 A [OP_LIST_FIND_UNK],2
+25A7를 올림하여 십의 자리까지 나타내면 2570이 됩니다. A를 구하시오.,25A7 [OP_GEN_POSSIBLE_LIST] 2570 [OP_LIST_LESS_EQUAL] 2570 10 [OP_SUB] [OP_LIST_MORE] 25A7 A [OP_LIST_FIND_UNK],6
+2A1를 버림하여 십의 자리까지 나타내면 230이 됩니다. A를 구하시오.,2A1 [OP_GEN_POSSIBLE_LIST] 230 [OP_LIST_MORE_EQUAL] 230 10 [OP_ADD] [OP_LIST_LESS] 2A1 A [OP_LIST_FIND_UNK],3
+2A3을 버림하여 십의 자리까지 나타내면 280이 됩니다. A를 구하시오.,2A3 [OP_GEN_POSSIBLE_LIST] 280 [OP_LIST_MORE_EQUAL] 280 10 [OP_ADD] [OP_LIST_LESS] 2A3 A [OP_LIST_FIND_UNK],8
+34A5를 버림하여 십의 자리까지 나타내면 3420이 됩니다. A를 구하시오.,34A5 [OP_GEN_POSSIBLE_LIST] 3420 [OP_LIST_MORE_EQUAL] 3420 10 [OP_ADD] [OP_LIST_LESS] 34A5 A [OP_LIST_FIND_UNK],2
+3A96을 버림하여 백의 자리까지 나타내면 3100이 됩니다. A를 구하시오.,3A96 [OP_GEN_POSSIBLE_LIST] 3100 [OP_LIST_MORE_EQUAL] 3100 100 [OP_ADD] [OP_LIST_LESS] 3A96 A [OP_LIST_FIND_UNK],1
+48A8을 십의 자리에서 반올림하면 4900이 됩니다. 0부터 9까지의 숫자 중 A에 쓸 수 있는 숫자는 모두 몇 개입니까?,48A8 [OP_GEN_POSSIBLE_LIST] 4900 50 [OP_ADD] [OP_LIST_LESS] 4900 50 [OP_SUB] [OP_LIST_MORE_EQUAL] 48A8 A [OP_LIST_FIND_UNK] [OP_LIST_LEN],5
+6A35를 버림하여 백의 자리까지 나타내면 6100이 됩니다. A를 구하시오.,6A35 [OP_GEN_POSSIBLE_LIST] 6100 [OP_LIST_MORE_EQUAL] 6100 100 [OP_ADD] [OP_LIST_LESS] 6A35 A [OP_LIST_FIND_UNK],1
+6A76을 버림하여 백의 자리까지 나타내면 6800이 됩니다. A를 구하시오.,6A76 [OP_GEN_POSSIBLE_LIST] 6800 [OP_LIST_MORE_EQUAL] 6800 100 [OP_ADD] [OP_LIST_LESS] 6A76 A [OP_LIST_FIND_UNK],8
+73A94를 백의 자리에서 반올림하면 74000이 된다고 합니다. A에 들어갈 수 있는 숫자는 모두 몇 개입니까?,73A94 [OP_GEN_POSSIBLE_LIST] 74000 [OP_LIST_LESS] 74000 500 [OP_SUB] [OP_LIST_MORE_EQUAL] 73A94 A [OP_LIST_FIND_UNK] [OP_LIST_LEN],5
+7A7을 올림하여 십의 자리까지 나타내면 730이 됩니다. A를 구하시오.,7A7 [OP_GEN_POSSIBLE_LIST] 730 [OP_LIST_LESS_EQUAL] 730 10 [OP_SUB] [OP_LIST_MORE] 7A7 A [OP_LIST_FIND_UNK],2
+8A4를 올림하여 십의 자리까지 나타내면 870이 됩니다. A를 구하시오.,8A4 [OP_GEN_POSSIBLE_LIST] 870 [OP_LIST_LESS_EQUAL] 870 10 [OP_SUB] [OP_LIST_MORE] 8A4 A [OP_LIST_FIND_UNK],6
+세 자리수 A27을 백의 자리에서 버림하면 200이 됩니다. A를 구하시오.,A27 [OP_GEN_POSSIBLE_LIST] 200 [OP_LIST_MORE_EQUAL] 200 100 [OP_ADD] [OP_LIST_LESS] A27 A [OP_LIST_FIND_UNK],2
+A567을 십의 자리에서 버림하면 2560이 됩니다. A를 구하시오.,A567 [OP_GEN_POSSIBLE_LIST] 2000 [OP_LIST_MORE_EQUAL] 2000 10 [OP_ADD] [OP_LIST_LESS] A567 A [OP_LIST_FIND_UNK],2
+A76을 백의 자리에서 버림하면 700이 됩니다. A를 구하시오.,A76 [OP_GEN_POSSIBLE_LIST] 700 [OP_LIST_MORE_EQUAL] 700 100 [OP_ADD] [OP_LIST_LESS] A76 A [OP_LIST_FIND_UNK],7
 "두 자연수 A, B가 있습니다. A를 B로 나누었을 때 몫이 9이고, 나머지가 13이었다면, A를 9로 나누었을 때의 나머지는 얼마입니까?",13 9 [OP_MOD],4
 "서로 다른 세 수 A, B, C가 있습니다. 세 자리 수끼리의 덧셈식 A2B+BC4=726이고, 세 자리 수끼리의 뺄셈식 A2B-BC4=318입니다. A, B, C의 합을 구하시오.",A2B+BC4=726 A [OP_DIGIT_UNK_SOLVER] A2B+BC4=726 B [OP_DIGIT_UNK_SOLVER] A2B+BC4=726 C [OP_DIGIT_UNK_SOLVER] [OP_ADD] [OP_ADD],7
 "어떤 수에 -2/3을 곱하고 -4/5를 나누면 -1/2일 때, 어떤 수를 구하시오.",-1/2 -4/5 [OP_MUL] -2/3 [OP_DIV],-0.6
@@ -1396,44 +1396,44 @@ A76을 백의 자리에서 버림하면 700이 됩니다. A를 구하시오.,[OP
 1/4×1/8=1/(4×A)=1/B 일 때 A와 B의 합은?,1/4×1/8=1/(4×A)=1/B A [OP_NUM_UNK_SOLVER] 1/4×1/8=1/(4×A)=1/B B [OP_NUM_UNK_SOLVER] [OP_ADD],40
 1/6×1/3=1/(A×3)=1/B 일 때 A와 B의 합은?,1/6×1/3=1/(A×3)=1/B A [OP_NUM_UNK_SOLVER] 1/6×1/3=1/(A×3)=1/B B [OP_NUM_UNK_SOLVER] [OP_ADD],24
 "연속된 세 자연수 A, B, C이 있다. A는 8의 배수, B는 7의 배수, C는 5의 배수라고 할 때, 1000보다 큰 수 중 가장 작은 A를 구하여라.",1000 1 [OP_ADD] 9999 1 [OP_LIST_ARANGE] 8 [OP_LIST_DIVISIBLE] 1 [OP_LIST_MIN],1008
-"여섯자리 수 12ABC8은 137의 배수이다. 이 때, 세 자리 수 ABC에 알맞은 수는 모두 몇 가지인가?",[OP_LIST_SOL] 1 2 A B C 8 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 137 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],7
+"여섯자리 수 12ABC8은 137의 배수이다. 이 때, 세 자리 수 ABC에 알맞은 수는 모두 몇 가지인가?",12ABC8 [OP_GEN_POSSIBLE_LIST] 137 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],7
 "들이가 서로 다른 A, B, C 3개의 병이 있습니다. A병 7개와 B병 3개의 들이는 같고, B병 1개의 들이와 C병 5개의 들이는 같습니다. A병 21개의 들이는 C병 몇 개의 들이와 같습니까?",21 7 [OP_DIV] 3 [OP_MUL] 1 [OP_DIV] 5 [OP_MUL],45
-"일곱자리 수 25AB33C는 8의 배수이고 9의 배수이면서, 11의 배수라고 한다. A를 구하시오.",[OP_LIST_SOL] 2 5 A B 3 3 C [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 8 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] 11 [OP_LIST_DIVISIBLE] 25AB33C A [OP_LIST_FIND_UNK],8
-"일곱자리 수 25AB33C는 8의 배수이고 9의 배수이면서, 11의 배수라고 한다. A, B, C의 합을 구하시오",[OP_LIST_SOL] 2 5 A B 3 3 C [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 8 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] 11 [OP_LIST_DIVISIBLE] 25AB33C A [OP_LIST_FIND_UNK] 25AB33C B [OP_LIST_FIND_UNK] [OP_ADD] 25AB33C C [OP_LIST_FIND_UNK] [OP_ADD],14
-"일곱자리 수 25AB33C는 8의 배수이고 9의 배수이면서, 11의 배수라고 한다. B를 구하시오.",[OP_LIST_SOL] 2 5 A B 3 3 C [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 8 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] 11 [OP_LIST_DIVISIBLE] 25AB33C B [OP_LIST_FIND_UNK],0
-"다섯 자리 수 26AA2는 3의 배수이다. A가 같은 숫자를 나타낼 때, A에 알맞은 숫자는 모두 몇 개인가?",[OP_LIST_SOL] 2 6 A A 2 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 3 [OP_LIST_DIVISIBLE] 26AA2 A [OP_LIST_FIND_UNK] [OP_LIST_LEN],
-27A8에 3403를 더한 값은 6153보다 작습니다. 0부터 9까지의 숫자 중 A에 쓸 수 있는 숫자는 모두 몇 개입니까?,[OP_LIST_SOL] 2 7 A 8 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 6153 3403 [OP_SUB] [OP_LIST_LESS] 27A8 A [OP_LIST_FIND_UNK] [OP_LIST_LEN],5
+"일곱자리 수 25AB33C는 8의 배수이고 9의 배수이면서, 11의 배수라고 한다. A를 구하시오.",25AB33C [OP_GEN_POSSIBLE_LIST] 8 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] 11 [OP_LIST_DIVISIBLE] 25AB33C A [OP_LIST_FIND_UNK],8
+"일곱자리 수 25AB33C는 8의 배수이고 9의 배수이면서, 11의 배수라고 한다. A, B, C의 합을 구하시오",25AB33C [OP_GEN_POSSIBLE_LIST] 8 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] 11 [OP_LIST_DIVISIBLE] 25AB33C A [OP_LIST_FIND_UNK] 25AB33C B [OP_LIST_FIND_UNK] [OP_ADD] 25AB33C C [OP_LIST_FIND_UNK] [OP_ADD],14
+"일곱자리 수 25AB33C는 8의 배수이고 9의 배수이면서, 11의 배수라고 한다. B를 구하시오.",25AB33C [OP_GEN_POSSIBLE_LIST] 8 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] 11 [OP_LIST_DIVISIBLE] 25AB33C B [OP_LIST_FIND_UNK],0
+"다섯 자리 수 26AA2는 3의 배수이다. A가 같은 숫자를 나타낼 때, A에 알맞은 숫자는 모두 몇 개인가?",26AA2 [OP_GEN_POSSIBLE_LIST] 3 [OP_LIST_DIVISIBLE] 26AA2 A [OP_LIST_FIND_UNK] [OP_LIST_LEN],
+27A8에 3403를 더한 값은 6153보다 작습니다. 0부터 9까지의 숫자 중 A에 쓸 수 있는 숫자는 모두 몇 개입니까?,27A8 [OP_GEN_POSSIBLE_LIST] 6153 3403 [OP_SUB] [OP_LIST_LESS] 27A8 A [OP_LIST_FIND_UNK] [OP_LIST_LEN],5
 "A, B, C 3개의 물탱크에 물이 들어 있습니다. A 물탱크에는 물이 29리터(ℓ) 들어있고, B 물탱크에는 A 물탱크에 들어 있는 물보다 2700밀리리터(㎖) 더 적게 들어 있고, C 물탱크에는 A 물탱크와 B 물탱크에 들어 있는 물의 합보다 4750밀리리터(㎖) 더 많이 들어 있습니다. C 물탱크에 들어 있는 물은 몇 리터(ℓ)입니까?",29 29 2700 1000 [OP_DIV] [OP_SUB] [OP_ADD] 4750 1000 [OP_DIV] [OP_ADD],60.05
 "A, B는 한 자리 수입니다. 3/12<A/12<7/12와 1/10<1/B<1/3이 성립하는 모든 A의 개수와 모든 B의 개수의 합은 얼마입니까?",3/12<A/12<7/12 A [OP_DIGIT_UNK_SOLVER] [OP_LIST_LEN] 1/10<1/B<1/3 B [OP_DIGIT_UNK_SOLVER] [OP_LIST_LEN] [OP_ADD],9
 A와 B의 합을 찾으시오. 3/7=6/A=B/21,3/7=6/A=B/21 A [OP_NUM_UNK_SOLVER] 3/7=6/A=B/21 B [OP_NUM_UNK_SOLVER] [OP_ADD],23
-"여섯 자리 수 341ABC이 7, 9, 13으로 나누어 떨어질 때, 세 자리 수 ABC은 얼마인지 구하여라.",[OP_LIST_SOL] 3 4 1 A B C [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 7 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] 13 [OP_LIST_DIVISIBLE] 341ABC A [OP_LIST_FIND_UNK] 100 [OP_MUL] 341ABC B [OP_LIST_FIND_UNK] 10 [OP_MUL] 341ABC C [OP_LIST_FIND_UNK] [OP_ADD] [OP_ADD],523
+"여섯 자리 수 341ABC이 7, 9, 13으로 나누어 떨어질 때, 세 자리 수 ABC은 얼마인지 구하여라.",341ABC [OP_GEN_POSSIBLE_LIST] 7 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] 13 [OP_LIST_DIVISIBLE] 341ABC A [OP_LIST_FIND_UNK] 100 [OP_MUL] 341ABC B [OP_LIST_FIND_UNK] 10 [OP_MUL] 341ABC C [OP_LIST_FIND_UNK] [OP_ADD] [OP_ADD],523
 360÷(A×A×A/B)=5의 식을 만족하는 가장 작은 자연수 A를 구하여라.,360÷(A×A×A/B)=5 A [OP_NUM_UNK_SOLVER] 1 [OP_LIST_MIN],24
 "360÷(A×A×A/B)=5의 식을 만족하는 가장 작은 자연수 A, B의 합을 구하여라.",360÷(A×A×A/B)=5 A [OP_NUM_UNK_SOLVER] 1 [OP_LIST_MIN] 360÷(A×A×A/B)=5 B [OP_NUM_UNK_SOLVER] 1 [OP_LIST_MIN] [OP_ADD],9
 360÷(A×A×A/B)=5의 식을 만족하는 가장 작은 자연수 B를 구하여라.,360÷(A×A×A/B)=5 B [OP_NUM_UNK_SOLVER] 1 [OP_LIST_MIN],1
-네 자리 수 4A8B은 93의 배수이다. 이때 A+B의 값을 구하여라.,[OP_LIST_SOL] 4 A 8 B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 93 [OP_LIST_DIVISIBLE] 4A8B A [OP_LIST_FIND_UNK] 4A8B B [OP_LIST_FIND_UNK] [OP_ADD],6
-"네 자리 수 4AB5는 175로 나누어떨어진다고 한다. 가능한 B의 개수를 구하여라. 단, A, B는 모두 0보다 크다.",[OP_LIST_SOL] 4 A B 5 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 175 [OP_LIST_DIVISIBLE] 4AB5 B [OP_LIST_FIND_UNK] [OP_LIST_LEN],2
+네 자리 수 4A8B은 93의 배수이다. 이때 A+B의 값을 구하여라.,4A8B [OP_GEN_POSSIBLE_LIST] 93 [OP_LIST_DIVISIBLE] 4A8B A [OP_LIST_FIND_UNK] 4A8B B [OP_LIST_FIND_UNK] [OP_ADD],6
+"네 자리 수 4AB5는 175로 나누어떨어진다고 한다. 가능한 B의 개수를 구하여라. 단, A, B는 모두 0보다 크다.",4AB5 [OP_GEN_POSSIBLE_LIST] 175 [OP_LIST_DIVISIBLE] 4AB5 B [OP_LIST_FIND_UNK] [OP_LIST_LEN],2
 "서로 다른 세 자연수 A, B, C에 대하여 50×A=12×B=C×C를 만족시키는 가장 작은 수 C를 구하여라.",50×A=12×B=C×C C [OP_NUM_UNK_SOLVER] 1 [OP_LIST_MIN],30
 "1/A=-3, 2/B=4, 3/C=1/2일 때, 6A-8B+C의 값을 구하여라",6 1 -3 [OP_DIV] [OP_MUL] 8 2 4 [OP_DIV] [OP_MUL] [OP_SUB] 1 3 1/2 [OP_DIV] [OP_MUL] [OP_ADD],0
-"여섯 자리 수 637ABC는 2, 7, 13으로 나누어떨어진다. B가 될 수 있는 수는 모두 몇 개인가?",[OP_LIST_SOL] 6 3 7 A B C [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 2 [OP_LIST_DIVISIBLE] 7 [OP_LIST_DIVISIBLE] 13 [OP_LIST_DIVISIBLE] 637ABC B [OP_LIST_FIND_UNK] [OP_LIST_LEN],6
-"다섯 자리 수 6AB87은 9의 배수이다. A, B에 알맞은 숫자를 찾아 숫자 쌍을 만들 때, 가능한 숫자 쌍은 모두 몇 가지인가?",[OP_LIST_SOL] 6 A B 8 7 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 9 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
-여덟 자리 수 757AB384는 357로 나누어떨어지는 수이다. A를 구하시오.,[OP_LIST_SOL] 7 5 7 A B 3 8 4 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 357 [OP_LIST_DIVISIBLE] 757AB384 A [OP_LIST_FIND_UNK],9
-여덟 자리 수 757AB384는 357로 나누어떨어지는 수이다. B를 구하시오.,[OP_LIST_SOL] 7 5 7 A B 3 8 4 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 357 [OP_LIST_DIVISIBLE] 757AB384 B [OP_LIST_FIND_UNK],5
-"여섯 자리 수 7ABABA가 6의 배수일 때, 이러한 여섯 자리 수는 모두 몇 가지나 되는지 구하여라.",[OP_LIST_SOL] 7 A B A B A [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 6 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],88
+"여섯 자리 수 637ABC는 2, 7, 13으로 나누어떨어진다. B가 될 수 있는 수는 모두 몇 개인가?",637ABC [OP_GEN_POSSIBLE_LIST] 2 [OP_LIST_DIVISIBLE] 7 [OP_LIST_DIVISIBLE] 13 [OP_LIST_DIVISIBLE] 637ABC B [OP_LIST_FIND_UNK] [OP_LIST_LEN],6
+"다섯 자리 수 6AB87은 9의 배수이다. A, B에 알맞은 숫자를 찾아 숫자 쌍을 만들 때, 가능한 숫자 쌍은 모두 몇 가지인가?",6AB87 [OP_GEN_POSSIBLE_LIST] 9 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
+여덟 자리 수 757AB384는 357로 나누어떨어지는 수이다. A를 구하시오.,757AB384 [OP_GEN_POSSIBLE_LIST] 357 [OP_LIST_DIVISIBLE] 757AB384 A [OP_LIST_FIND_UNK],9
+여덟 자리 수 757AB384는 357로 나누어떨어지는 수이다. B를 구하시오.,757AB384 [OP_GEN_POSSIBLE_LIST] 357 [OP_LIST_DIVISIBLE] 757AB384 B [OP_LIST_FIND_UNK],5
+"여섯 자리 수 7ABABA가 6의 배수일 때, 이러한 여섯 자리 수는 모두 몇 가지나 되는지 구하여라.",7ABABA [OP_GEN_POSSIBLE_LIST] 6 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],88
 A는 한 자리 수입니다. 나눗셈 9A5÷5<197에서 A 안에 들어갈 수 있는 숫자는 모두 몇 개입니까?,9A5÷5<197 A [OP_DIGIT_UNK_SOLVER] [OP_LIST_LEN],8
 A는 한 자리 수입니다. 한 자리 수끼리의 곱셈식 A×A×A=21A에서 A를 구하시오.,A×A×A=21A A [OP_DIGIT_UNK_SOLVER],6
-"여섯 자리 수 A15B94가 99의 배수일 때, A를 구하시오",[OP_LIST_SOL] A 1 5 B 9 4 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 99 [OP_LIST_DIVISIBLE] A15B94 A [OP_LIST_FIND_UNK],5
-"여섯 자리 수 A15B94가 99의 배수일 때, A와 B의 합을 구하시오.",[OP_LIST_SOL] A 1 5 B 9 4 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 99 [OP_LIST_DIVISIBLE] A15B94 A [OP_LIST_FIND_UNK] A15B94 B [OP_LIST_FIND_UNK] [OP_ADD],8
-"여섯 자리 수 A15B94가 99의 배수일 때, B를 구하시오",[OP_LIST_SOL] A 1 5 B 9 4 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 99 [OP_LIST_DIVISIBLE] A15B94 B [OP_LIST_FIND_UNK],3
-여섯 자리 수 A2468B은 55로 나누어떨어지는 수이다. A2468B이 될 수 있는 수는 모두 몇 개인가?,[OP_LIST_SOL] A 2 4 6 8 B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 55 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
-다섯 자리 수 A375B는 24로 나누어 떨어진다. A에 알맞은 숫자는 모두 몇 개인가?,[OP_LIST_SOL] A 3 7 5 B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 24 [OP_LIST_DIVISIBLE] A375B A [OP_LIST_FIND_UNK] [OP_LIST_LEN],
-"여섯 자리 수 A4461B이 72로 나누어 떨어질 때, A+B를 구하시오.",[OP_LIST_SOL] A 4 4 6 1 B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 72 [OP_LIST_DIVISIBLE] A4461B A [OP_LIST_FIND_UNK] A4461B B [OP_LIST_FIND_UNK] [OP_ADD],
-"다섯 자리 수 A47BC이 4, 5, 9의 배수가 될 때, A에 알맞은 숫자는 모두 몇 개인가?",[OP_LIST_SOL] A 4 7 B C [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 24 [OP_LIST_DIVISIBLE] 5 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] A47BC A [OP_LIST_FIND_UNK] [OP_LIST_LEN],
-네 자리 수 A56B은 36으로 나누어 떨어진다. A에 알맞은 숫자는 모두 몇 개입니까?,[OP_LIST_SOL] A 5 6 B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 36 [OP_LIST_DIVISIBLE] A56B A [OP_LIST_FIND_UNK] [OP_LIST_LEN],
-"다섯 자리 수 A835B은 12로 나누어 떨어진다. A, B에 알맞은 숫자를 넣어 만든 다섯 자리 수 중에서 가장 큰 수와 가장 작은 수와의 차를 구하여라.",[OP_LIST_SOL] A 8 3 5 B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 12 [OP_LIST_DIVISIBLE] 1 [OP_LIST_MAX] 1 [OP_LIST_MIN] [OP_SUB],69996
+"여섯 자리 수 A15B94가 99의 배수일 때, A를 구하시오",A15B94 [OP_GEN_POSSIBLE_LIST] 99 [OP_LIST_DIVISIBLE] A15B94 A [OP_LIST_FIND_UNK],5
+"여섯 자리 수 A15B94가 99의 배수일 때, A와 B의 합을 구하시오.",A15B94 [OP_GEN_POSSIBLE_LIST] 99 [OP_LIST_DIVISIBLE] A15B94 A [OP_LIST_FIND_UNK] A15B94 B [OP_LIST_FIND_UNK] [OP_ADD],8
+"여섯 자리 수 A15B94가 99의 배수일 때, B를 구하시오",A15B94 [OP_GEN_POSSIBLE_LIST] 99 [OP_LIST_DIVISIBLE] A15B94 B [OP_LIST_FIND_UNK],3
+여섯 자리 수 A2468B은 55로 나누어떨어지는 수이다. A2468B이 될 수 있는 수는 모두 몇 개인가?,A2468B [OP_GEN_POSSIBLE_LIST] 55 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
+다섯 자리 수 A375B는 24로 나누어 떨어진다. A에 알맞은 숫자는 모두 몇 개인가?,A375B [OP_GEN_POSSIBLE_LIST] 24 [OP_LIST_DIVISIBLE] A375B A [OP_LIST_FIND_UNK] [OP_LIST_LEN],
+"여섯 자리 수 A4461B이 72로 나누어 떨어질 때, A+B를 구하시오.",A4461B [OP_GEN_POSSIBLE_LIST] 72 [OP_LIST_DIVISIBLE] A4461B A [OP_LIST_FIND_UNK] A4461B B [OP_LIST_FIND_UNK] [OP_ADD],
+"다섯 자리 수 A47BC이 4, 5, 9의 배수가 될 때, A에 알맞은 숫자는 모두 몇 개인가?",A47BC [OP_GEN_POSSIBLE_LIST] 24 [OP_LIST_DIVISIBLE] 5 [OP_LIST_DIVISIBLE] 9 [OP_LIST_DIVISIBLE] A47BC A [OP_LIST_FIND_UNK] [OP_LIST_LEN],
+네 자리 수 A56B은 36으로 나누어 떨어진다. A에 알맞은 숫자는 모두 몇 개입니까?,A56B [OP_GEN_POSSIBLE_LIST] 36 [OP_LIST_DIVISIBLE] A56B A [OP_LIST_FIND_UNK] [OP_LIST_LEN],
+"다섯 자리 수 A835B은 12로 나누어 떨어진다. A, B에 알맞은 숫자를 넣어 만든 다섯 자리 수 중에서 가장 큰 수와 가장 작은 수와의 차를 구하여라.",A835B [OP_GEN_POSSIBLE_LIST] 12 [OP_LIST_DIVISIBLE] 1 [OP_LIST_MAX] 1 [OP_LIST_MIN] [OP_SUB],69996
 A는 한 자리 수입니다. 두 자리 수끼리의 곱셈식 AA×AA=5929에서 A를 구하시오.,AA×AA=5929 A [OP_DIGIT_UNK_SOLVER],7
 "서로 다른 두 수 A, B가 있습니다. 곱셈식 AB×6=BBB에서 A와 B의 합을 구하시오.",AB×6=BBB A [OP_DIGIT_UNK_SOLVER] AB×6=BBB B [OP_DIGIT_UNK_SOLVER] [OP_ADD],11
-AB19를 올림하여 백의 자리까지 나타내면 7300입니다. AB19를 버림하여 십의 자리까지 나타내시오.,[OP_LIST_SOL] A B 1 9 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 7200 [OP_LIST_MORE] 7300 [OP_LIST_LESS_EQUAL] AB19 A [OP_LIST_FIND_UNK] 1000 [OP_MUL] AB19 B [OP_LIST_FIND_UNK] 100 [OP_MUL] [OP_ADD] 19 [OP_ADD] 2 [OP_FLOOR],7210
-다섯 자리 수 AB40C은 45의 배수이다. 이러한 다섯 자리 수는 모두 몇 가지인지 구하여라.,[OP_LIST_SOL] A B 4 0 C [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 45 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
+AB19를 올림하여 백의 자리까지 나타내면 7300입니다. AB19를 버림하여 십의 자리까지 나타내시오.,AB19 [OP_GEN_POSSIBLE_LIST] 7200 [OP_LIST_MORE] 7300 [OP_LIST_LESS_EQUAL] AB19 A [OP_LIST_FIND_UNK] 1000 [OP_MUL] AB19 B [OP_LIST_FIND_UNK] 100 [OP_MUL] [OP_ADD] 19 [OP_ADD] 2 [OP_FLOOR],7210
+다섯 자리 수 AB40C은 45의 배수이다. 이러한 다섯 자리 수는 모두 몇 가지인지 구하여라.,AB40C [OP_GEN_POSSIBLE_LIST] 45 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
 "상은이는 물건을 사러 가서 첫 번째 가게에서 가지고 있던 돈의 절반과 2000원을 쓰고, 두 번째 가게에서 남은 돈의 절반과 2000원을 썼더니 남은 돈이 없었습니다. 상은이가 처음에 가지고 있던 돈은 얼마인가요?",0 2000 [OP_ADD] 2 [OP_MUL] 2000 [OP_ADD] 2 [OP_MUL],12000
 "상자 안에 사탕이 들어 있습니다. 이 사탕을 30개씩 포장하면 14개가 남고, 50개씩 포장하면 24개가 남고, 70개씩 포장하면 34개가 남습니다. 상자 안에 들어있는 사탕은 최소 몇 개인지 구하시오.",0 9999 1 [OP_LIST_ARANGE] 30 14 [OP_LIST_DIVIDE_AND_REMAIN] 50 24 [OP_LIST_DIVIDE_AND_REMAIN] 70 34 [OP_LIST_DIVIDE_AND_REMAIN] 1 [OP_LIST_MIN],524
 "석기는 가지고 있던 사탕의 1/2를 예슬이에게 주고, 그 나머지의 1/3을 동민이에게 주었더니 12개가 남았습니다. 석기는 처음에 몇 개의 사탕을 가지고 있었습니까?",12 1 1/3 [OP_SUB] [OP_DIV] 1 1/2 [OP_SUB] [OP_DIV],36
@@ -1475,7 +1475,7 @@ AB19를 올림하여 백의 자리까지 나타내면 7300입니다. AB19를 버
 어떤 수를 6으로 나누어야 할 것을 잘못하여 9로 나누었더니 몫이 8이고 나머지가 7이었습니다. 바르게 계산한 몫을 구하시오,8 9 [OP_MUL] 7 [OP_ADD] 6 [OP_FDIV],13
 어떤 수를 7로 나누어야 할 것을 잘못하여 곱하였더니 115.15였습니다. 바르게 계산한 값은 얼마입니까?,115.15 7 [OP_DIV] 7 [OP_DIV],2.35
 어떤 수를 8로 나누어야 할 것을 7로 나누었더니 몫은 13이고 나머지는 1이었습니다. 바르게 계산한 몫과 나머지의 합을 구하시오.,13 7 [OP_MUL] 1 [OP_ADD] 8 [OP_FDIV] 13 7 [OP_MUL] 1 [OP_ADD] 8 [OP_MOD] [OP_ADD],15
-어떤 수를 8로 나누어야 할 것을 잘못하여 곱했더니 56이 되었습니다. 바르게 계산하면 얼마인지 소수점 둘째자리까지 나타내시오.,56 8 [OP_DIV] 8 [OP_DIV],44750
+어떤 수를 8로 나누어야 할 것을 잘못하여 곱했더니 56이 되었습니다. 바르게 계산하면 얼마인지 소수점 둘째자리까지 나타내시오.,56 8 [OP_DIV] 8 [OP_DIV],0.88
 어떤 수에 12를 더하고 37로 나누어야 할 것을 잘못하여 12를 빼고 73으로 나누었더니 몫이 11이고 나머지가 36이 되었습니다. 바르게 계산한 몫과 나머지의 합을 구하시오,11 73 [OP_MUL] 36 [OP_ADD] 12 [OP_ADD] 12 [OP_ADD] 37 [OP_FDIV] 11 73 [OP_MUL] 36 [OP_ADD] 12 [OP_ADD] 12 [OP_ADD] 37 [OP_MOD] [OP_ADD],35
 어떤 수에 2를 곱한 뒤 45를 빼야 할 것을 잘못하여 어떤 수를 2로 나누고 45를 더하였더니 85가 되었습니다. 바르게 계산한 값을 구하시오.,85 45 [OP_SUB] 2 [OP_MUL] 2 [OP_MUL] 45 [OP_SUB],115
 어떤 수에 5를 곱해야 할 것을 잘못하여 15를 곱하였더니 45가 되었습니다. 바르게 계산한 결과를 구하시오.,45 15 [OP_DIV] 5 [OP_MUL],15
@@ -1513,14 +1513,14 @@ AB19를 올림하여 백의 자리까지 나타내면 7300입니다. AB19를 버
 514에서 어떤 수를 빼어야 할 것을 잘못하여 더하였더니 913이 되었습니다. 바르게 계산하면 얼마입니까?,514 913 514 [OP_SUB] [OP_SUB],115
 52에 어떤 수를 더하여 3을 곱한 뒤 60을 빼고 8로 나누었더니 15가 되었습니다. 어떤 수를 구하시오.,15 8 [OP_MUL] 60 [OP_ADD] 3 [OP_DIV] 52 [OP_SUB],8
 55에 어떤 수를 더하여 7로 나눈 뒤 40을 더하여 5를 곱한 수가 555입니다. 어떤 수를 구하시오.,555 5 [OP_DIV] 40 [OP_SUB] 7 [OP_MUL] 55 [OP_SUB],442
-58 에 어떤 수를 더하고 48 을 빼야 할 것을 58 에서 어떤 수를 빼었더니 27 이 되었습니다. 바르게 계산하면 얼마입니까?, 58 27 [OP_SUB] 48 [OP_SUB] 58 [OP_ADD] 48 [OP_SUB],41
+58 에 어떤 수를 더하고 48 을 빼야 할 것을 58 에서 어떤 수를 빼었더니 27 이 되었습니다. 바르게 계산하면 얼마입니까?,58 27 [OP_SUB] 58 [OP_ADD] 48 [OP_SUB],41
 66 에서 어떤 수를 빼고 21 을 더해야 할 것을 66 에 어떤 수를 더했더니 93 이 되었습니다. 바르게 계산하면 얼마입니까?,66 93 66 [OP_SUB] [OP_SUB] 21 [OP_ADD],60
 713에서 어떤 수를 빼야 할 것을 잘못하여 더했더니 928이 되었습니다. 바르게 계산하면 얼마인지 구해 보시오.,713 928 713 [OP_SUB] [OP_SUB],498
 8050 에 어떤 수를 곱하였더니 80.5 가 되었습니다. 어떤 수는 얼마입니까?,80.5 8050 [OP_DIV],0.01
 82.04를 어떤 수로 나누었더니 몫이 28로 나누어 떨어졌습니다. 어떤 수는 얼마입니까?,82.04 28 [OP_DIV],2.93
 90.1 을 어떤 수로 나누었더니 5.3 이 되었습니다. 어떤 수는 얼마인지 구하시오.,90.1 5.3 [OP_DIV],17
 90을 어떤 수로 나누었을 때 나누어떨어지게 하는 수는 모두 몇 개일까요?,90 [OP_LIST_GET_DIVISOR] [OP_LIST_LEN],12
-954에 어떤 수를 더해야 할 것을 잘못하여 뺐더니 468이 되었습니다. 바르게 계산하면 얼마인지 구해 보시오.,954 468 [OP_ADD] 468 [OP_ADD],1440
+954에 어떤 수를 더해야 할 것을 잘못하여 뺐더니 468이 되었습니다. 바르게 계산하면 얼마인지 구해 보시오.,954 468 [OP_SUB] 954 [OP_ADD],1440
 샛별이네 학교 학생들이 서로 한 번씩 씨름 경기를 하려고 합니다. 씨름 경기를 모두 91번 했다면 경기에 참여한 학생은 모두 몇 명입니까?,91 2 [OP_MUL] 1/2 [OP_POW] 1 [OP_CEIL],14
 "세 수 (가), (나), (다)가 있다. (가)를 (나)로 나누면 몫이 1.2로 나누어떨어지고, (나)를 (다)로 나누면 몫이 5/6로 나누어떨어진다. (가)를 (다)로 나누면 그 몫은 얼마인가?",1.2 5/6 [OP_MUL],1
 어떤 나눗셈식의 몫을 잘못하여 소수점을 기준으로 수를 왼쪽으로 한 자리씩 이동하여 나타내었더니 바르게 계산한 몫과의 차가 37.35 가 되었습니다. 바르게 계산한 몫을 구해 보시오,37.35 9 [OP_DIV],4.15
@@ -1561,7 +1561,7 @@ AB19를 올림하여 백의 자리까지 나타내면 7300입니다. AB19를 버
 어떤 수를 8로 나눈 몫이 0.65입니다. 어떤 수를 5로 나눈 몫은 얼마인지 구해보세요.,0.65 8 [OP_MUL] 5 [OP_FDIV],1
 어떤 수에 1.36 을 곱해야 하는데 잘못하여 나누었더니 몫이 0.5 가 되었습니다. 바르게 계산하면 얼마입니까?,0.5 1.36 [OP_MUL] 1.36 [OP_MUL],0.9248
 어떤 수에 11을 곱했더니 103.95가 되었습니다. 어떤 수는 얼마입니까?,103.95 11 [OP_DIV],9.45
-어떤 수에 13/5을 더해야 할 것을 잘못하여 빼었더니 9/7가 되었습니다. 바르게 계산하면 얼마입니까?,9/7 13/5 [OP_ADD] 13/5 [OP_ADD],227/35
+어떤 수에 13/5을 더해야 할 것을 잘못하여 빼었더니 9/7가 되었습니다. 바르게 계산하면 얼마입니까?,9/7 13/5 [OP_ADD] 13/5 [OP_ADD],6.49
 어떤 수에 14를 곱하였더니 458.64가 되었습니다. 어떤 수를 17로 나누었을 때의 값을 반올림하여 소수 둘째 자리까지 나타내시오.,458.64 14 [OP_DIV] 17 [OP_DIV] 2 [OP_ROUND],1.93
 어떤 수에 15 를 곱해야 할 것을 잘못하여 51 을 곱하였더니 244.8 이 되었습니다. 바르게 계산한 값을 구하시오.,244.8 51 [OP_DIV] 15 [OP_MUL],72
 어떤 수에 152를 더해야 할 것을 잘못하여 뺐더니 346이 되었습니다. 바르게 계산하면 얼마인지 구해 보시오.,346 152 [OP_ADD] 152 [OP_ADD],650
@@ -1918,7 +1918,7 @@ AB19를 올림하여 백의 자리까지 나타내면 7300입니다. AB19를 버
 부피가 세제곱센티미터(㎤)인 쌓기나무를 한 층에 36개씩 쌓아 부피가 252세제곱센티미터(㎤)인 직육면체를 만들었습니다. 이 직육면체의 쌓기나무는 몇 층으로 쌓여 있습니까?,252 36 1 [OP_MUL] [OP_DIV],7
 부피가 2744세제곱센티미터(㎤)인 정육면체의 한 모서리는 몇 센티미터(㎝) 입니까?,2744 1/3 [OP_POW],14
 부피가 3375세제곱센티미터(㎤)인 정육면체의 한 모서리를 구하시오,3375 1/3 [OP_POW],15
-부피가 6400세제곱센티미터(㎤)인 정육면체의 한 모서리의 길이는 몇 미터(m)입니까?,6400 100 3 [OP_POW] [OP_DIV] 1/3 [OP_POW],0.4
+부피가 64000세제곱센티미터(㎤)인 정육면체의 한 모서리의 길이는 몇 미터(m)입니까?,64000 100 3 [OP_POW] [OP_DIV] 1/3 [OP_POW],0.4
 "빗변의 길이가 15 센티미터(㎝), 밑변의 길이가 9 센티미터(㎝)인 삼각형의 넓이는?",15 2 [OP_POW] 9 2 [OP_POW] [OP_SUB] 1/2 [OP_POW] 9 [OP_MUL] 2 [OP_DIV],54
 사각뿔대의 면의 개수는?,4 2 [OP_ADD],6
 사각뿔의 면의 개수는?,4 1 [OP_ADD],5
@@ -2715,10 +2715,10 @@ AB19를 올림하여 백의 자리까지 나타내면 7300입니다. AB19를 버
 "백의 자리가 7이고, 십의 자리가 5인 네 자리 수 중 홀수의 개수를 구하시오.",[OP_LIST_SOL] A 7 5 B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 1000 10000 [OP_LIST_ODD] [OP_SET_INTERSECT] [OP_LIST_LEN],
 백의 자리가 7인 세 자리수 중 7의 배수는 몇 개입니까?,[OP_LIST_SOL] 7 A B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 7 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
 백의 자리가 7인 세 자리수 중 가장 큰 수는 얼마입니까?,[OP_LIST_SOL] 7 A B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 1 [OP_LIST_MAX],
-"세 자리 자연수 7AB가 7의 배수일 때, 두 자리 자연수 AB로 가능한 수는 몇 가지인지 구하시오.",[OP_LIST_SOL] 7 A B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 7 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
+"세 자리 자연수 7AB가 7의 배수일 때, 두 자리 자연수 AB로 가능한 수는 몇 가지인지 구하시오.",7AB [OP_GEN_POSSIBLE_LIST] 7 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
 천의 자리가 1이고 일의 자리가 9인 수 중 약수가 1과 자기 자신뿐인 수는 몇 개입니까?,[OP_LIST_SOL] 1 A B 9 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] [OP_LIST_PRIME] [OP_SET_INTERSECT] [OP_LIST_LEN],
 천의 자리가 1이고 일의 자리가 9인 수 중 1과 자기 자신으로만 나누어떨어지는 수는 몇 개입니까?,[OP_LIST_SOL] 1 A 8 9 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] [OP_LIST_PRIME] [OP_SET_INTERSECT] [OP_LIST_LEN],
-"다섯 자리의 비밀번호가 적힌 종이 일부가 찢어져 천의 자리와 백의 자리에 있는 숫자가 보이지 않습니다. 만의 자리는 1, 십의 자리는 9, 일의 자리는 3일 때, 비밀번호를 알아내기 위해선 최대 몇 번을 입력해야 합니까?",[OP_LIST_SOL] 1 A B 9 3 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] [OP_LIST_LEN],
+"다섯 자리의 비밀번호가 적힌 종이 일부가 찢어져 천의 자리와 백의 자리에 있는 숫자가 보이지 않습니다. 만의 자리는 1, 십의 자리는 9, 일의 자리는 3일 때, 비밀번호를 알아내기 위해선 최대 몇 번을 입력해야 합니까?",[OP_LIST_SOL] 1 A B 9 3 [OP_LIST_EOL] [OP_LIST2NUM] [OP_GEN_POSSIBLE_LIST] [OP_LIST_LEN],
 백의 자리가 1인 세 자리 수를 모두 합하면 얼마입니까?,[OP_LIST_SOL] 1 A B [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] [OP_LIST_SUM],
 민혁이가 기현이의 수학 시험 점수를 물어보자 기현이는 반올림하여 십의 자리까지 나타내면 90이라고 답하였습니다. 기현이의 수학 점수로 가능한 가장 큰 수는 무엇입니까?,[OP_LIST_SOL] 9 A [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 90 5 [OP_ADD] [OP_LIST_LESS] 1 [OP_LIST_MAX],
 현우가 주헌이의 과학 시험 점수를 물어보자 주헌이는 80점대라고 답하였습니다. 주헌이의 과학 시험 점수로 가능한 가장 큰 수는 무엇입니까?,[OP_LIST_SOL] 8 A [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 1 [OP_LIST_MAX],
@@ -2933,15 +2933,15 @@ AB19를 올림하여 백의 자리까지 나타내면 7300입니다. AB19를 버
 "2, 3, 7로 두 자리 자연수를 만들려고 한다. 만들 수 있는 모든 수들의 합을 구하시오.",[OP_LIST_SOL] 2 3 7 [OP_LIST_EOL] 2 [OP_LIST_GET_PRODUCT] [OP_LIST_SUM],
 "주사위를 세 번 던져서 나온 값을 각각 백의 자리, 십의 자리, 일의 자리로 하는 수를 만든다. 가능한 수들의 평균을 구하시오.",1 6 [OP_LIST_ODD] 3 [OP_LIST_GET_PRODUCT] [OP_LIST_MEAN],
 "백의 자리 숫자가 7, 일의 자리 숫자가 3인 수들 중 3의 배수는 몇 개인지 구하시오.",[OP_LIST_SOL] 7 A 3 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 3 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
-9A7을 버림하여 십의 자리까지 나타내면 930이다. A의 값을 구하시오.,[OP_LIST_SOL] 9 A 7 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 930 [OP_LIST_MORE_EQUAL] 930 10 [OP_ADD] [OP_LIST_LESS] 9A7 A [OP_LIST_FIND_UNK],
-97A를 반올림하여 980이 되는 A중 가장 큰 값을 구하시오.,[OP_LIST_SOL] 9 7 A [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 970 5 [OP_ADD] [OP_LIST_MORE_EQUAL] 1 [OP_LIST_MAX],
-97A를 반올림하여 970이 되는 A중 가장 작은 값을 구하시오.,[OP_LIST_SOL] 9 7 A [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 970 5 [OP_ADD] [OP_LIST_MORE_EQUAL] 1 [OP_LIST_MIN],
-다섯자리 수 1ABC9가 13으로 나누어 떨어진다. 세자리수 ABC가 가능한 수는 몇 개인지 구하시오.,[OP_LIST_SOL] 1 A B C 9 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 13 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
+9A7을 버림하여 십의 자리까지 나타내면 930이다. A의 값을 구하시오.,9A7 [OP_GEN_POSSIBLE_LIST] 930 [OP_LIST_MORE_EQUAL] 930 10 [OP_ADD] [OP_LIST_LESS] 9A7 A [OP_LIST_FIND_UNK],
+97A를 반올림하여 980이 되는 A중 가장 큰 값을 구하시오.,97A [OP_GEN_POSSIBLE_LIST] 970 5 [OP_ADD] [OP_LIST_MORE_EQUAL] 1 [OP_LIST_MAX],
+97A를 반올림하여 970이 되는 A중 가장 작은 값을 구하시오.,97A [OP_GEN_POSSIBLE_LIST] 970 5 [OP_ADD] [OP_LIST_MORE_EQUAL] 1 [OP_LIST_MIN],
+다섯자리 수 1ABC9가 13으로 나누어 떨어진다. 세자리수 ABC가 가능한 수는 몇 개인지 구하시오.,1ABC9 [OP_GEN_POSSIBLE_LIST] 13 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
 "백의 자리 숫자가 7, 일의 자리 숫자가 3이면서 3으로 나눈 나머지가 1인 수 중 가장 큰 값을 구하시오.",[OP_LIST_SOL] 7 A 3 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 3 1 [OP_LIST_DIVIDE_AND_REMAIN] 1 [OP_LIST_MAX],
 "백의 자리 숫자가 7, 일의 자리 숫자가 3이면서 소수인 수 중 가장 큰 수는 얼마입니까?",[OP_LIST_SOL] 7 A 3 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] [OP_LIST_PRIME] [OP_SET_INTERSECT] 1 [OP_LIST_MAX],
 "백의 자리 숫자가 7, 일의 자리 숫자가 3이면서 3으로 나눈 나머지가 1인 수 중 가장 작은 값을 구하시오.",[OP_LIST_SOL] 7 A 3 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 3 1 [OP_LIST_DIVIDE_AND_REMAIN] 1 [OP_LIST_MIN],
 "백의 자리 숫자가 7, 일의 자리 숫자가 3이면서 소수인 수 중 가장 작은 수는 얼마입니까?",[OP_LIST_SOL] 7 A 3 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] [OP_LIST_PRIME] [OP_SET_INTERSECT] 1 [OP_LIST_MIN],
-"네 자리 자연수 5AB0는 4로 나누어 떨어지고 5로도 나누어 떨어진다. 가능한 A,B의 조합은 몇 개 인지 구하시오.",[OP_LIST_SOL] 5 A B 0 [OP_LIST_EOL] [OP_GEN_POSSIBLE_LIST] 4 [OP_LIST_DIVISIBLE] 5 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
+"네 자리 자연수 5AB0는 4로 나누어 떨어지고 5로도 나누어 떨어진다. 가능한 A,B의 조합은 몇 개 인지 구하시오.",5AB0 [OP_GEN_POSSIBLE_LIST] 4 [OP_LIST_DIVISIBLE] 5 [OP_LIST_DIVISIBLE] [OP_LIST_LEN],
 "과일가게에 귤이 71개, 사과가 84개, 감이 92개 있다. 과일가게에 있는 총 과일 개수는 몇 개인지 구하시오.",[OP_LIST_SOL] 71 84 92 [OP_LIST_EOL] [OP_LIST_SUM],
 1부터 25까지 자연수의 합을 구하시오.,1 25 1 [OP_LIST_ARANGE] [OP_LIST_SUM],
 20이상 35이하의 짝수의 총합을 구하시오.,20 35 [OP_LIST_EVEN] [OP_LIST_SUM],
