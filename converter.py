@@ -246,7 +246,7 @@ class PostfixConverter:
 
     # convert function
     @timeout(10)
-    def convert(self, postfix_eq: str, input_question_str: str):
+    def convert(self, postfix_eq: str, input_question_str: str = None):
         """
         Calculate postfix equation
         :param postfix_eq: postfix equation
@@ -2097,36 +2097,56 @@ else:\n\
         # 문제 입력됨: 소수점 판별
         # 11/03 조건: "소수점" + "포함" => 소수점 두 자리로 라운딩
         # else => 정수로 반올림
-        result = str(result)
-        if "소수점" in input_question_str and "포함" in input_question_str:
+        if input_question_str is None:
+            # 문제 입력되지 않음 - 기존 방법대로
             try:
-                result = float(result)
-            except ValueError:
-                # 스트링
-                result = result.replace('(', '')
-                result = result.replace(')', '')
-            else:
-                # 정수 또는 소수
-                result = format(result, '.2f')
-
-            self.code_string += f'print({result})'
+                if int(result) != self.to_float(result):  # float
+                    result = '{:.2f}'.format(round(abs(result) + 1e-10, 2))
+                    if str(result)[-3:] == ".00":
+                        result = int(result[:-3])
+                        self.code_string += "print(int(eval('{:.2f}'.format(round(%s+1e-10,2)))))" % name
+                    else:
+                        self.code_string += "print('{:.2f}'.format(round(%s+1e-10,2)))" % name
+                else:  # int
+                    result = int(abs(result))
+                    self.code_string += 'print(int({}))'.format(name)
+            except:  # string
+                name = name.replace('(', '')
+                name = name.replace(')', '')
+                self.code_string += 'print({})'.format(name)
 
         else:
-            if result.isdigit():
-                # result가 정수
-                result = int(result)
-                self.code_string += f'print(int({result}))'
-            else:
+            # 문제 입력됨 - 소수점 판별
+            result = str(result)
+            if "소수점" in input_question_str and "포함" in input_question_str:
                 try:
                     result = float(result)
                 except ValueError:
                     # 스트링
                     result = result.replace('(', '')
                     result = result.replace(')', '')
-                    self.code_string += f'print({result})'
                 else:
-                    # 소수점
-                    result = int(result + (0.5 if result > 0 else -0.5))
+                    # 정수 또는 소수
+                    result = format(result, '.2f')
+
+                self.code_string += f'print({result})'
+
+            else:
+                if result.isdigit():
+                    # result가 정수
+                    result = int(result)
                     self.code_string += f'print(int({result}))'
+                else:
+                    try:
+                        result = float(result)
+                    except ValueError:
+                        # 스트링
+                        result = result.replace('(', '')
+                        result = result.replace(')', '')
+                        self.code_string += f'print({result})'
+                    else:
+                        # 소수점
+                        result = int(result + (0.5 if result > 0 else -0.5))
+                        self.code_string += f'print(int({result}))'
 
         return result, self.code_string
