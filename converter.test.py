@@ -6,9 +6,10 @@ while True:
     pc = PostfixConverter()
 
     try:
+        question = input("\n\nInput question (Ctrl+D to stop): ")
         ops = input("\n\nInput equation (Ctrl+D to stop): ")
 
-        result, code_string = pc.convert(ops)
+        result, code_string = pc.convert(ops, question)
 
         print("\n=== Code String ===", code_string, sep='\n')
         print("\n=== Execution ===")

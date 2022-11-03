@@ -246,7 +246,13 @@ class PostfixConverter:
 
     # convert function
     @timeout(10)
-    def convert(self, postfix_eq):
+    def convert(self, postfix_eq: str, input_question_str: str):
+        """
+        Calculate postfix equation
+        :param postfix_eq: postfix equation
+        :param input_question_str: input question
+        :return: (result, code_string)
+        """
         # 주요 function : 주어진 postfix 식을 code로 생성.
         self.__init__()
         operand_operator_list = postfix_eq.split()
@@ -2087,20 +2093,40 @@ else:\n\
         # 문제정의서에 '정답은 정수로 기재하되 문제에서 소수점의 답을 요구할 경우 반올림하여 소수점 둘째자리까지 기재'로 되어있습니다.
         # 따라서 소수점의 답을 요구하지 않을 경우 정수로 기재하고 소수점을 요구할 경우 반올림하여 소수점 둘째짜리까지 기재하시면 됩니다.
         # 예를 들어 문제에서 소수점을 포함하여 답을 하라라고 했을 때 정답이 6.127이면 6.13으로 기재하고 정답이 3.2이면 3.20으로 기재하시면 됩니다.
-        try:
-            if int(result) != self.to_float(result):  # float
-                result = '{:.2f}'.format(round(abs(result) + 1e-10, 2))
-                if str(result)[-3:] == ".00":
-                    result = int(result[:-3])
-                    self.code_string += "print(int(eval('{:.2f}'.format(round(%s+1e-10,2)))))" % name
+
+        # 문제 입력됨: 소수점 판별
+        # 11/03 조건: "소수점" + "포함" => 소수점 두 자리로 라운딩
+        # else => 정수로 반올림
+        result = str(result)
+        if "소수점" in input_question_str and "포함" in input_question_str:
+            try:
+                result = float(result)
+            except ValueError:
+                # 스트링
+                result = result.replace('(', '')
+                result = result.replace(')', '')
+            else:
+                # 정수 또는 소수
+                result = format(result, '.2f')
+
+            self.code_string += f'print({result})'
+
+        else:
+            if result.isdigit():
+                # result가 정수
+                result = int(result)
+                self.code_string += f'print(int({result}))'
+            else:
+                try:
+                    result = float(result)
+                except ValueError:
+                    # 스트링
+                    result = result.replace('(', '')
+                    result = result.replace(')', '')
+                    self.code_string += f'print({result})'
                 else:
-                    self.code_string += "print('{:.2f}'.format(round(%s+1e-10,2)))" % name
-            else:  # int
-                result = int(abs(result))
-                self.code_string += 'print(int({}))'.format(name)
-        except:  # string
-            name = name.replace('(', '')
-            name = name.replace(')', '')
-            self.code_string += 'print({})'.format(name)
+                    # 소수점
+                    result = int(result + (0.5 if result > 0 else -0.5))
+                    self.code_string += f'print(int({result}))'
 
         return result, self.code_string
