@@ -532,8 +532,8 @@ for i, elem in enumerate(range({b})):\n\
                             term_list.append(temp_c)
                             new_eq = ''
                             for i in range(len(op_list)):
-                                new_eq += str(int(term_list[i])) + op_list[i]
-                            new_eq += str(int(term_list[-1]))
+                                new_eq += str(term_list[i]) + op_list[i]
+                            new_eq += str(term_list[-1])
                             if len(new_eq) == len(eq):
                                 new_eq = new_eq.replace('=', '==')
                                 new_eq = new_eq.replace('>==', '>=')
