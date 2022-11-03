@@ -1618,9 +1618,9 @@ else:\n\
                                     f"{new_list_name} = list(item_name_index_dict.keys())\n" \
                                     f"{new_list_name}.sort(key=item_name_index_dict.get, reverse=True)\n"
 
-                                self.list_stack.push(a_list, a_lname)
-                                self.list_stack.push(b_list, b_lname)
-                                self.list_stack.push(intermediate_list, new_list_name)
+                            self.list_stack.push(a_list, a_lname)
+                            self.list_stack.push(b_list, b_lname)
+                            self.list_stack.push(intermediate_list, new_list_name)
 
                         elif operator_name in ['[OP_LIST_SCALAR_ADD]', '[OP_LIST_SCALAR_MUL]']:
                             a, a_name = self.operand_stack.pop()
